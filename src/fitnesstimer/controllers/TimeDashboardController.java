@@ -7,13 +7,13 @@
  */
 package fitnesstimer.controllers;
 
-import fitnesstimer.i18n.I18n;
+import fitnesstimer.controllers.base.AbstractController;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -22,14 +22,14 @@ import javafx.scene.control.Label;
  *
  * @author Dani
  */
-public class TimeDashboardController implements Initializable {
-    
-    private final I18n i18n = I18n.getInstance();
+public class TimeDashboardController extends AbstractController {
 
     @FXML
     private Button button;
     @FXML
     private Label label;
+    
+    private boolean paused = true;
 
     /**
      * Initializes the controller class.
@@ -43,6 +43,47 @@ public class TimeDashboardController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
         i18n.setLocale(Locale.ITALY);
+    }
+    
+    @FXML
+    private void onNext(ActionEvent event) {
+        // TODO
+    }
+    
+    @FXML
+    private void onPause(ActionEvent event) {
+        paused = true;
+        // TODO
+    }
+    
+    @FXML
+    private void onResume(ActionEvent event) {
+        paused = false;
+        // TODO
+    }
+    
+    @FXML
+    private void onTogglePause(ActionEvent event) {
+        if (paused) {
+            onResume(event);
+        } else {
+            onPause(event);
+        }
+    }
+    
+    @FXML
+    private void onResetCurrent(ActionEvent event) {
+        // TODO
+    }
+    
+    @FXML
+    private void onResetSession(ActionEvent event) {
+        // TODO
+    }
+    
+    private void onQuit(ActionEvent event) {
+        Platform.exit();
+        System.exit(0);
     }
     
 }
