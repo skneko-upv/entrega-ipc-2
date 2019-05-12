@@ -7,9 +7,9 @@
  */
 package fitnesstimer.controllers;
 
+import fitnesstime.component.Countdown;
 import fitnesstimer.controllers.base.AbstractController;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -29,20 +29,26 @@ public class TimeDashboardController extends AbstractController {
     @FXML
     private Label label;
     
-    private boolean paused = true;
+    private static final short COUNTDOWN_RATE = 5;
+    private Countdown countdown;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        label.textProperty().bind(i18n.getStringBinding("app.title"));
+        countdown = new Countdown(0,2,0,0,COUNTDOWN_RATE);
+        label.textProperty().bind(countdown.getStringBinding());
+        
+        countdown.finishedProperty().addListener((_val, _old, finished) -> {
+            if (finished) System.out.println("RING RING");
+        });
         // TODO
-    }    
+    }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        i18n.setLocale(Locale.ITALY);
+        countdown.resume();
     }
     
     @FXML
@@ -52,19 +58,19 @@ public class TimeDashboardController extends AbstractController {
     
     @FXML
     private void onPause(ActionEvent event) {
-        paused = true;
+        countdown.pause();
         // TODO
     }
     
     @FXML
     private void onResume(ActionEvent event) {
-        paused = false;
+        countdown.resume();
         // TODO
     }
     
     @FXML
     private void onTogglePause(ActionEvent event) {
-        if (paused) {
+        if (countdown.isPaused()) {
             onResume(event);
         } else {
             onPause(event);
