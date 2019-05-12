@@ -7,6 +7,8 @@
  */
 package fitnesstimer.application;
 
+import fitnesstimer.i18n.I18n;
+import java.util.Locale;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +19,8 @@ public class FitnessTimer extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        I18n.createInstance(Locale.getDefault());
+        
         Parent root = FXMLLoader.load(getClass().getResource("/fitnesstimer/views/TimeDashboard.fxml"));
         
         Scene scene = new Scene(root);

@@ -7,7 +7,9 @@
  */
 package fitnesstimer.controllers;
 
+import fitnesstimer.i18n.I18n;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +23,8 @@ import javafx.scene.control.Label;
  * @author Dani
  */
 public class TimeDashboardController implements Initializable {
+    
+    private final I18n i18n = I18n.getInstance();
 
     @FXML
     private Button button;
@@ -32,11 +36,13 @@ public class TimeDashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        label.textProperty().bind(i18n.getStringBinding("app.title"));
         // TODO
     }    
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        i18n.setLocale(Locale.ITALY);
     }
     
 }
