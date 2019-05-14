@@ -11,11 +11,13 @@ import fitnesstime.component.Countdown;
 import fitnesstimer.controllers.base.AbstractController;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import modelo.SesionTipo;
 
 /**
  * FXML Controller class
@@ -30,25 +32,103 @@ public class TimeDashboardController extends AbstractController {
     private Label label;
     
     private static final short COUNTDOWN_RATE = 5;
-    private Countdown countdown;
+    private Countdown timer;
+    
+    private enum ActivityKind { 
+        EXERCISE_RUN, EXERCISE_REST, TRACK_REST, FINISHED 
+    }
+    
+    private SesionTipo plan;
+    private int track;
+    private int exercise;
+    private ActivityKind phase;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        countdown = new Countdown(0,2,0,0,COUNTDOWN_RATE);
-        label.textProperty().bind(countdown.getStringBinding());
+        timer = new Countdown(0,2,0,0,COUNTDOWN_RATE);
+        label.textProperty().bind(timer.getStringBinding());
         
-        countdown.finishedProperty().addListener((_val, _old, finished) -> {
+        timer.finishedProperty().addListener((_val, _old, finished) -> {
             if (finished) System.out.println("RING RING");
         });
         // TODO
     }
+    
+    private void nextActivity() {
+        prepareNextActivity();
+        setupScene();
+    }
+    
+    private void prepareNextActivity() {
+        switch (phase) {
+            case EXERCISE_RUN:
+                phase = ActivityKind.EXERCISE_REST;
+                break;
+                
+            case EXERCISE_REST:
+                if (exercise >= plan.getNum_ejercicios()) {  // if last exercise in track
+                    phase = ActivityKind.TRACK_REST;
+                    return;
+                }
+                
+                phase = ActivityKind.EXERCISE_RUN;
+                exercise++;
+                break;
+                
+            case TRACK_REST:
+                if (track >= plan.getNum_circuitos()) {  // if last track in session
+                    phase = ActivityKind.FINISHED;
+                    return;
+                }
+                
+                phase = ActivityKind.EXERCISE_RUN;
+                track++;
+                exercise = 1;
+                break;
+                
+            case FINISHED:
+            default:
+                {}
+        }
+    }
+    
+    private void setupScene() {
+        int duration;
+        String descKey;
+        
+        switch (phase) {
+            case EXERCISE_RUN:
+                duration = plan.getT_ejercicio();
+                descKey = "phase.exerciseRun";
+                break;
+            case EXERCISE_REST:
+                duration = plan.getD_ejercicio();
+                descKey = "phase.exerciseRest";
+                break;
+            case TRACK_REST:
+                duration = plan.getD_circuito();
+                descKey = "phase.trackRest";
+                break;
+            case FINISHED:
+            default:
+                i18n.bind(label, "phase.finished");
+                timer.setToZero();
+                return;
+        }
+        
+        i18n.bind(label, descKey, track, exercise);
+        timer = new Countdown(
+                TimeUnit.SECONDS.toMillis(duration),
+                COUNTDOWN_RATE
+        );
+    }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        countdown.resume();
+        timer.resume();
     }
     
     @FXML
@@ -58,19 +138,19 @@ public class TimeDashboardController extends AbstractController {
     
     @FXML
     private void onPause(ActionEvent event) {
-        countdown.pause();
+        timer.pause();
         // TODO
     }
     
     @FXML
     private void onResume(ActionEvent event) {
-        countdown.resume();
+        timer.resume();
         // TODO
     }
     
     @FXML
     private void onTogglePause(ActionEvent event) {
-        if (countdown.isPaused()) {
+        if (timer.isPaused()) {
             onResume(event);
         } else {
             onPause(event);
