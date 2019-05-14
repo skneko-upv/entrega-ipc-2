@@ -49,7 +49,7 @@ public class ObservableResourceFactory {
         return String.format(getResources().getString(key), args);
     }
     
-    public void bind(Labeled property, String key, Object... args) {
-        property.textProperty().bind(getStringBinding(key, args));
+    public void bind(Labeled node, String key, Object... args) {
+        node.textProperty().bind(getStringBinding(key, args));
     }
 }
