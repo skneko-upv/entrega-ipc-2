@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="394.0" prefWidth="352.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="568.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" text="Retroceder">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" text="Crear">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="455.0" prefWidth="609.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fill="#726868" layoutX="26.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-up" text="Descripción">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="16.0" />
+               </font>
+            </Text>
+            <Line endX="199.0" layoutX="135.0" layoutY="37.0" startX="-120.0" />
+            <GridPane layoutX="26.0" layoutY="57.0" prefHeight="257.0" prefWidth="326.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="68.0" prefWidth="163.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="128.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Text fill="#575757" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Nº de circuitos" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="13.0" />
+                     </font>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <TextField fx:id="numCirField" alignment="BASELINE_LEFT" editable="false" maxWidth="-Infinity" prefHeight="25.0" prefWidth="109.0" styleClass="text-id-sub">
+                           <VBox.margin>
+                              <Insets top="18.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="13.0" />
+                           </font>
+                        </TextField>
+                        <Label fx:id="numCirErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
+                  <Text fill="#575757" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Nº de ejercicios por circuito" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="13.0" />
+                     </font>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <TextField fx:id="numExerField" alignment="BASELINE_LEFT" editable="false" maxWidth="-Infinity" prefHeight="25.0" prefWidth="109.0" styleClass="text-id-sub">
+                           <VBox.margin>
+                              <Insets top="18.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="13.0" />
+                           </font>
+                        </TextField>
+                        <Label fx:id="numExerErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
+                  <Text fill="#575757" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Tiempo por ejercicio" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="13.0" />
+                     </font>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <TextField fx:id="timeExerField" alignment="BASELINE_LEFT" editable="false" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
+                           <VBox.margin>
+                              <Insets top="18.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="13.0" />
+                           </font>
+                        </TextField>
+                        <Label fx:id="timeExerErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
+                  <Text fill="#575757" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Tiempo de calentamiento" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="13.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <TextField fx:id="timePreExerField" alignment="BASELINE_LEFT" editable="false" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
+                           <VBox.margin>
+                              <Insets top="18.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="13.0" />
+                           </font>
+                        </TextField>
+                        <Label fx:id="timePreExerErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
+                  <Text fill="#575757" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Descanso entre ejercicios" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="13.0" />
+                     </font>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="275.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <TextField fx:id="timeRestExField" alignment="BASELINE_LEFT" editable="false" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
+                           <VBox.margin>
+                              <Insets top="18.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="13.0" />
+                           </font>
+                        </TextField>
+                        <Label fx:id="timeRestExErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
+                  <Text fill="#575757" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Descanso entre circuitos " GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="13.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" prefHeight="75.0" prefWidth="275.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <children>
+                        <TextField fx:id="timeRestCiField" alignment="BASELINE_LEFT" editable="false" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
+                           <VBox.margin>
+                              <Insets top="18.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="13.0" />
+                           </font>
+                        </TextField>
+                        <Label fx:id="timeRestCiErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
+               </children>
+            </GridPane>
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </AnchorPane>
+   </center>
+</BorderPane>
