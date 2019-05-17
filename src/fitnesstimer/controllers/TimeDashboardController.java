@@ -51,13 +51,21 @@ public class TimeDashboardController extends AbstractController {
         timer = new Countdown(0,2,0,0,COUNTDOWN_RATE);
         label.textProperty().bind(timer.getStringBinding());
         
-        timer.finishedProperty().addListener((_val, _old, finished) -> {
-            if (finished) System.out.println("RING RING");
+        timer.finishedProperty().addListener((_val, _old, isZero) -> {
+            if (isZero) {
+                nextActivity();
+                timer.resume();
+                // TODO: warnings
+            }
         });
+        
+        setupSession();
+        
         // TODO
     }
     
     private void nextActivity() {
+        timer.pause();
         prepareNextActivity();
         setupScene();
     }
@@ -125,27 +133,27 @@ public class TimeDashboardController extends AbstractController {
                 COUNTDOWN_RATE
         );
     }
-
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        timer.resume();
+    
+    private void setupSession() {
+        track = 1;
+        exercise = 1;
+        phase = ActivityKind.EXERCISE_RUN;
+        setupScene();
     }
     
     @FXML
     private void onNext(ActionEvent event) {
-        // TODO
+        nextActivity();
     }
     
     @FXML
     private void onPause(ActionEvent event) {
         timer.pause();
-        // TODO
     }
     
     @FXML
     private void onResume(ActionEvent event) {
         timer.resume();
-        // TODO
     }
     
     @FXML
@@ -159,12 +167,14 @@ public class TimeDashboardController extends AbstractController {
     
     @FXML
     private void onResetCurrent(ActionEvent event) {
-        // TODO
+        timer.pause();
+        setupScene();
     }
     
     @FXML
     private void onResetSession(ActionEvent event) {
-        // TODO
+        timer.pause();
+        setupSession();
     }
     
     private void onQuit(ActionEvent event) {
