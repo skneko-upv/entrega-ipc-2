@@ -45,6 +45,8 @@ public class TimeDashboardController extends AbstractController {
 
     /**
      * Initializes the controller class.
+     * @param url Not used
+     * @param rb Not used
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
