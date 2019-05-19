@@ -103,7 +103,7 @@ public class GroupSelectorController extends AbstractController {
             
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene next = new Scene(root);
-            stage.setTitle(i18n.getResources().getString("sessionSelector.window.title"));
+            stage.titleProperty().bind(i18n.getStringBinding("sessionSelector.window.title"));
             stage.setScene(next);
         } catch (IOException e) {
             System.err.println(e);
