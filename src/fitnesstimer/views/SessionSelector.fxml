@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="521.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="521.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.SessionSelectorController">
    <center>
       <GridPane prefHeight="521.0" prefWidth="244.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -25,7 +25,7 @@
           <RowConstraints minHeight="10.0" percentHeight="0.0" prefHeight="44.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ListView prefHeight="420.0" prefWidth="214.0">
+            <ListView fx:id="plansView" prefHeight="420.0" prefWidth="214.0">
                <GridPane.margin>
                   <Insets bottom="10.0" left="20.0" right="15.0" top="20.0" />
                </GridPane.margin>
@@ -155,11 +155,11 @@
    <bottom>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="568.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Retroceder">
+            <Button fx:id="prevBtn" mnemonicParsing="false" onAction="#onPrev" text="Retroceder">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font></Button>
-            <Button mnemonicParsing="false" text="Continuar">
+            <Button fx:id="nextBtn" mnemonicParsing="false" onAction="#onNext" text="Continuar">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font></Button>
