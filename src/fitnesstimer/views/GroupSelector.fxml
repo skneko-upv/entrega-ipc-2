@@ -11,10 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane minHeight="300.0" minWidth="300.0" prefHeight="500.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane minHeight="300.0" minWidth="300.0" prefHeight="500.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.GroupSelectorController">
    <center>
-      <ListView fx:id="groupList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ListView fx:id="groupsView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="30.0" left="30.0" right="15.0" top="30.0" />
          </BorderPane.margin>
@@ -42,7 +41,7 @@
                         <Font name="Microsoft Sans Serif" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="showBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onShowHistory" prefWidth="90.0" text="Ver historial">
+                  <Button fx:id="showHistoryBtn" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onShowHistory" prefWidth="90.0" text="Ver historial">
                      <font>
                         <Font name="Microsoft Sans Serif" size="12.0" />
                      </font>
