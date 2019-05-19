@@ -5,7 +5,7 @@
  *  Daniel Galán Pascual
  *  Alberto Baixauli Herráez
  */
-package fitnesstime.component;
+package fitnesstimer.component;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

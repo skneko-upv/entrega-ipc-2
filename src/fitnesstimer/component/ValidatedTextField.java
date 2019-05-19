@@ -5,7 +5,7 @@
  *  Daniel Galán Pascual
  *  Alberto Baixauli Herráez
  */
-package fitnesstime.component;
+package fitnesstimer.component;
 
 import java.util.ArrayList;
 import java.util.List;
