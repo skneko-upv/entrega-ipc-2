@@ -7,7 +7,7 @@
  */
 package fitnesstimer.controllers;
 
-import fitnesstime.component.Countdown;
+import fitnesstimer.component.Countdown;
 import fitnesstimer.controllers.base.AbstractController;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,14 +30,14 @@ public class TimeDashboardController extends AbstractController {
     private Button button;
     @FXML
     private Label label;
-    
+
     private static final short COUNTDOWN_RATE = 5;
     private Countdown timer;
-    
-    private enum ActivityKind { 
-        EXERCISE_RUN, EXERCISE_REST, TRACK_REST, FINISHED 
+
+    private enum ActivityKind {
+        EXERCISE_RUN, EXERCISE_REST, TRACK_REST, FINISHED
     }
-    
+
     private SesionTipo plan;
     private int track;
     private int exercise;
@@ -52,7 +52,7 @@ public class TimeDashboardController extends AbstractController {
     public void initialize(URL url, ResourceBundle rb) {
         timer = new Countdown(0,2,0,0,COUNTDOWN_RATE);
         label.textProperty().bind(timer.getStringBinding());
-        
+
         timer.finishedProperty().addListener((_val, _old, isZero) -> {
             if (isZero) {
                 nextActivity();
@@ -60,55 +60,55 @@ public class TimeDashboardController extends AbstractController {
                 // TODO: warnings
             }
         });
-        
+
         setupSession();
-        
+
         // TODO
     }
-    
+
     private void nextActivity() {
         timer.pause();
         prepareNextActivity();
         setupScene();
     }
-    
+
     private void prepareNextActivity() {
         switch (phase) {
             case EXERCISE_RUN:
                 phase = ActivityKind.EXERCISE_REST;
                 break;
-                
+
             case EXERCISE_REST:
                 if (exercise >= plan.getNum_ejercicios()) {  // if last exercise in track
                     phase = ActivityKind.TRACK_REST;
                     return;
                 }
-                
+
                 phase = ActivityKind.EXERCISE_RUN;
                 exercise++;
                 break;
-                
+
             case TRACK_REST:
                 if (track >= plan.getNum_circuitos()) {  // if last track in session
                     phase = ActivityKind.FINISHED;
                     return;
                 }
-                
+
                 phase = ActivityKind.EXERCISE_RUN;
                 track++;
                 exercise = 1;
                 break;
-                
+
             case FINISHED:
             default:
                 {}
         }
     }
-    
+
     private void setupScene() {
         int duration;
         String descKey;
-        
+
         switch (phase) {
             case EXERCISE_RUN:
                 duration = plan.getT_ejercicio();
@@ -128,36 +128,36 @@ public class TimeDashboardController extends AbstractController {
                 timer.setToZero();
                 return;
         }
-        
+
         i18n.bind(label, descKey, track, exercise);
         timer = new Countdown(
                 TimeUnit.SECONDS.toMillis(duration),
                 COUNTDOWN_RATE
         );
     }
-    
+
     private void setupSession() {
         track = 1;
         exercise = 1;
         phase = ActivityKind.EXERCISE_RUN;
         setupScene();
     }
-    
+
     @FXML
     private void onNext(ActionEvent event) {
         nextActivity();
     }
-    
+
     @FXML
     private void onPause(ActionEvent event) {
         timer.pause();
     }
-    
+
     @FXML
     private void onResume(ActionEvent event) {
         timer.resume();
     }
-    
+
     @FXML
     private void onTogglePause(ActionEvent event) {
         if (timer.isPaused()) {
@@ -166,22 +166,23 @@ public class TimeDashboardController extends AbstractController {
             onPause(event);
         }
     }
-    
+
     @FXML
     private void onResetCurrent(ActionEvent event) {
         timer.pause();
         setupScene();
     }
-    
+
     @FXML
     private void onResetSession(ActionEvent event) {
         timer.pause();
         setupSession();
     }
-    
+
+    @FXML
     private void onQuit(ActionEvent event) {
         Platform.exit();
         System.exit(0);
     }
-    
+
 }

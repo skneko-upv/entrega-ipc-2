@@ -23,7 +23,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Grupo;
@@ -40,7 +39,7 @@ public class SessionSelectorController extends AbstractController {
     private ListView<SesionTipo> plansView;
     @FXML
     private Button nextBtn;
-    
+
     private Grupo group;
     private ObservableList<SesionTipo> plans;
 
@@ -58,11 +57,11 @@ public class SessionSelectorController extends AbstractController {
             protected void updateItem(SesionTipo item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) { setText(null); }
-                else { 
+                else {
                     setText(String.format(
-                            "[%s] %dx%d %ds", 
-                            item.getCodigo(), 
-                            item.getNum_circuitos(), 
+                            "[%s] %dx%d %ds",
+                            item.getCodigo(),
+                            item.getNum_circuitos(),
                             item.getNum_ejercicios(),
                             item.getT_ejercicio()
                     ));
@@ -73,8 +72,8 @@ public class SessionSelectorController extends AbstractController {
                 Bindings.isNull(plansView.getSelectionModel().selectedItemProperty())
         );
         // TODO
-    }    
-    
+    }
+
     public void setup(Grupo group) {
         this.group = group;
     }
@@ -92,7 +91,7 @@ public class SessionSelectorController extends AbstractController {
 
             SessionFormController controller = loader.<SessionFormController>getController();
             controller.setup(null, true);
-            
+
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.titleProperty().bind(i18n.getStringBinding("sessionForm.window.title"));
@@ -114,5 +113,5 @@ public class SessionSelectorController extends AbstractController {
     private void onNext(ActionEvent event) {
         // TODO
     }
-    
+
 }
