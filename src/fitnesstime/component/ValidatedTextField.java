@@ -9,7 +9,6 @@ package fitnesstime.component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.function.Function;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,16 +18,6 @@ import javafx.scene.control.TextField;
  * @author Dani
  */
 public class ValidatedTextField {
-
-        public static final TextFieldValidator getNotEmptyValidator(ResourceBundle rb) {
-        return value -> {
-            if (value.equals("")) {
-                return rb.getString("form.generic.error.empty");
-            } else {
-                return null;
-            }
-        };
-    }
 
     private static final String CSS_ERROR_CLASS = "input-error";
 
@@ -91,15 +80,15 @@ public class ValidatedTextField {
         return isError;
     }
 
-    public void addValidator(TextFieldValidator validator) {
+    public final void addValidator(TextFieldValidator validator) {
         this.validators.add(validator);
     }
 
-    public boolean validate() {
+    public final boolean validate() {
         return validate(true);
     }
 
-    public boolean validate(boolean setErrorOnFail) {
+    public final boolean validate(boolean setErrorOnFail) {
         String error = null;
         for (TextFieldValidator validator : validators) {
             error = validator.apply(getText());
