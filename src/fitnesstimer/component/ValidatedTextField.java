@@ -10,8 +10,8 @@ package fitnesstimer.component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Labeled;
+import javafx.scene.control.TextInputControl;
 
 /**
  *
@@ -21,8 +21,8 @@ public class ValidatedTextField {
 
     private static final String CSS_ERROR_CLASS = "input-error";
 
-    private final TextField field;
-    private final Label errorLabel;
+    private final TextInputControl field;
+    private final Labeled errorLabel;
 
     private boolean isError;
     private List<TextFieldValidator> validators;
@@ -31,15 +31,15 @@ public class ValidatedTextField {
     public interface TextFieldValidator extends Function<String, String> {
     }
 
-    public ValidatedTextField(TextField field, Label errorLabel) {
+    public ValidatedTextField(TextInputControl field, Labeled errorLabel) {
         this(field, errorLabel, 0);
     }
 
-    public ValidatedTextField(TextField field, Label errorLabel, int maxLength) {
+    public ValidatedTextField(TextInputControl field, Labeled errorLabel, int maxLength) {
         this(field, errorLabel, maxLength, true);
     }
 
-    public ValidatedTextField(TextField field, Label errorLabel, int maxLength, boolean autoValidate) {
+    public ValidatedTextField(TextInputControl field, Labeled errorLabel, int maxLength, boolean autoValidate) {
         this.field = field;
         this.errorLabel = errorLabel;
         this.validators = new ArrayList<>();
@@ -56,11 +56,11 @@ public class ValidatedTextField {
         }
     }
 
-    public TextField getField() {
+    public TextInputControl getField() {
         return field;
     }
 
-    public Label getErrorLabel() {
+    public Labeled getErrorLabel() {
         return errorLabel;
     }
 

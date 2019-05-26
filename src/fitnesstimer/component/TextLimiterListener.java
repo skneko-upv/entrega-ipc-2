@@ -9,7 +9,7 @@ package fitnesstimer.component;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 
 /**
  *
@@ -17,10 +17,10 @@ import javafx.scene.control.TextField;
  */
 public class TextLimiterListener implements ChangeListener<String> {
     
-    private final TextField field;
+    private final TextInputControl field;
     private final int maxLength;
 
-    public TextLimiterListener(TextField field, int maxLength) {
+    public TextLimiterListener(TextInputControl field, int maxLength) {
         this.field = field;
         this.maxLength = maxLength;
     }
