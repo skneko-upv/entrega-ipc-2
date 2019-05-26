@@ -61,7 +61,7 @@ public abstract class AbstractFormController<T> extends AbstractController {
 
     @FXML
     protected void onCancel(ActionEvent event) {
-        ((Stage) cancelBtn.getScene().getWindow()).close();
+        close(event);
     }
     
 }
