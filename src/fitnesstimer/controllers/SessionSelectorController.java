@@ -71,6 +71,13 @@ public class SessionSelectorController extends AbstractController {
         nextBtn.disableProperty().bind(
                 Bindings.isNull(plansView.getSelectionModel().selectedItemProperty())
         );
+        
+        try {
+            plansView.getSelectionModel().select(group.getDefaultTipoSesion());
+        } catch (Exception e) {
+            System.err.println("Cannot select default plan of selected group: " + e);
+        }
+        
         // TODO
     }
 
@@ -90,7 +97,7 @@ public class SessionSelectorController extends AbstractController {
             Parent root = loader.load();
 
             SessionFormController controller = loader.<SessionFormController>getController();
-            controller.setup(null, true);
+            controller.setup(null, true, plans);
 
             Stage stage = new Stage();
             Scene scene = new Scene(root);
@@ -102,11 +109,23 @@ public class SessionSelectorController extends AbstractController {
         } catch (IOException e) {
             System.err.println(e);
         }
+        
+        plansView.getSelectionModel().select(plans.size() - 1);
     }
 
     @FXML
     private void onPrev(ActionEvent event) {
-        // TODO
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fitnesstimer/views/GroupSelector.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene next = new Scene(root);
+            stage.titleProperty().bind(i18n.getStringBinding("groupSelector.window.title"));
+            stage.setScene(next);
+        } catch (IOException e) {
+            System.err.println("Cannot switch to previous scene: " + e);
+        }
     }
 
     @FXML

@@ -11,6 +11,7 @@ import fitnesstimer.component.ValidatedTextField;
 import fitnesstimer.controllers.base.AbstractFormController;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -23,6 +24,8 @@ import modelo.SesionTipo;
  * @author Dani
  */
 public class SessionFormController extends AbstractFormController<SesionTipo> {
+    
+    public static final String ID_PATTERN = "P%d";
 
     @FXML
     private TextField tracksField;
@@ -55,6 +58,8 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
     private ValidatedIntField warmupTime;
     private ValidatedIntField exerciseRestTime;
     private ValidatedIntField trackRestTime;
+    
+    private ObservableList<SesionTipo> plans;
 
     /**
      * Initializes the controller class.
@@ -64,8 +69,9 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
     @Override
     public void initialize(URL url, ResourceBundle rb) {}
 
-    @Override
-    public void setup(SesionTipo prefill, boolean editMode) {
+    public void setup(SesionTipo prefill, boolean editMode, ObservableList<SesionTipo> plans) {
+        this.plans = plans;
+        
         tracks = new ValidatedIntField(tracksField, tracksErrorLabel);
         exercises = new ValidatedIntField(exercisesField, exercisesErrorLabel);
         exerciseTime = new ValidatedIntField(exerciseTimeField, exerciseTimeErrorLabel);
@@ -100,7 +106,7 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
     public void onSaveValidated(ActionEvent e) {
         SesionTipo plan = new SesionTipo();
 
-        plan.setCodigo(String.format("P%d", db.getGym().getTiposSesion().size() + 1));
+        plan.setCodigo(String.format(ID_PATTERN, db.getGym().getTiposSesion().size() + 1));
         plan.setNum_circuitos(tracks.getValue());
         plan.setNum_ejercicios(exercises.getValue());
         plan.setT_ejercicio(exerciseTime.getValue());
@@ -108,8 +114,7 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
         plan.setD_ejercicio(exerciseRestTime.getValue());
         plan.setD_circuito(trackRestTime.getValue());
 
-        db.getGym().getTiposSesion().add(plan);
-        db.salvar();
+        plans.add(plan);
     }
     
     @Override

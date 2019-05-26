@@ -106,7 +106,7 @@ public class GroupSelectorController extends AbstractController {
             stage.titleProperty().bind(i18n.getStringBinding("sessionSelector.window.title"));
             stage.setScene(next);
         } catch (IOException e) {
-            System.err.println(e);
+            System.err.println("Cannot switch to next scene: " + e);
         }
     }
     
