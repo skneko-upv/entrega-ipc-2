@@ -107,7 +107,7 @@ public class SessionSelectorController extends AbstractController {
             stage.initOwner(((Node) event.getSource()).getScene().getWindow());
             stage.showAndWait();
         } catch (IOException e) {
-            System.err.println(e);
+            System.err.println("Cannot launch form: " + e);
         }
         
         plansView.getSelectionModel().select(plans.size() - 1);
@@ -130,7 +130,12 @@ public class SessionSelectorController extends AbstractController {
 
     @FXML
     private void onNext(ActionEvent event) {
-        // TODO
+        SesionTipo selected = plansView.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+        
+        // TODO: set session & group on timer dashboard
+        
+        close(event);
     }
 
 }
