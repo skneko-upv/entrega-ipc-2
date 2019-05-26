@@ -73,6 +73,8 @@ public class GroupFormController extends AbstractFormController<Grupo> {
             group.setCodigo(groups.get(editIndex).getCodigo());
             groups.set(editIndex, group);
         }
+        
+        db.salvar();
     }
     
     @Override
