@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Grupo;
 
@@ -76,12 +77,12 @@ public class GroupSelectorController extends AbstractController {
 
     @FXML
     private void onAdd(ActionEvent event) {
-        // TODO
+        launchForm(event, false);
     }
 
     @FXML
     private void onEdit(ActionEvent event) {
-        // TODO
+        launchForm(event, true);
     }
 
     @FXML
@@ -110,4 +111,31 @@ public class GroupSelectorController extends AbstractController {
         }
     }
     
+    private void launchForm(ActionEvent event, boolean editing) {
+        Grupo prefill = null;
+        int index = -1;
+        if (editing) {
+            prefill = groupsView.getSelectionModel().getSelectedItem();
+            if (prefill == null) return;
+            index = groupsView.getSelectionModel().getSelectedIndex();
+        }
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fitnesstimer/views/GroupForm.fxml"));
+            Parent root = loader.load();
+            
+            GroupFormController controller = loader.<GroupFormController>getController();
+            controller.setup(prefill, true, groups, index);
+            
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.titleProperty().bind(i18n.getStringBinding("groupForm.window.title"));
+            stage.setScene(scene);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.showAndWait();
+        } catch (IOException e) {
+            System.err.println("Cannot launch form: " + e);
+        }
+    }
 }
