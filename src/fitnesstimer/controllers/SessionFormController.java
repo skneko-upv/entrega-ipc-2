@@ -106,7 +106,7 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
     public void onSaveValidated(ActionEvent e) {
         SesionTipo plan = new SesionTipo();
 
-        plan.setCodigo(String.format(ID_PATTERN, db.getGym().getTiposSesion().size() + 1));
+        plan.setCodigo(String.format(ID_PATTERN, plans.size() + 1));
         plan.setNum_circuitos(tracks.getValue());
         plan.setNum_ejercicios(exercises.getValue());
         plan.setT_ejercicio(exerciseTime.getValue());
