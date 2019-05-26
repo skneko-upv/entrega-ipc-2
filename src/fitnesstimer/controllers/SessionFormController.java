@@ -25,7 +25,7 @@ import modelo.SesionTipo;
  */
 public class SessionFormController extends AbstractFormController<SesionTipo> {
     
-    public static final String ID_PATTERN = "P%d";
+    public static final String ID_PATTERN = "W%d";
 
     @FXML
     private TextField tracksField;
@@ -85,11 +85,11 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
     @Override
     protected boolean validateAll() {
         return tracks.validate()
-                && exercises.validate()
-                && exerciseTime.validate()
-                && warmupTime.validate()
-                && exerciseRestTime.validate()
-                && trackRestTime.validate();
+                & exercises.validate()
+                & exerciseTime.validate()
+                & warmupTime.validate()
+                & exerciseRestTime.validate()
+                & trackRestTime.validate();
     }
 
     @Override
