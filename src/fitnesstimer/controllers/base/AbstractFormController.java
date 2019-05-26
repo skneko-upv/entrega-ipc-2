@@ -55,7 +55,7 @@ public abstract class AbstractFormController<T> extends AbstractController {
         setClearAll();
         if (validateAll()) {
             onSaveValidated(event);
-            ((Stage) cancelBtn.getScene().getWindow()).close();
+            close(event);
         }
     }
 
