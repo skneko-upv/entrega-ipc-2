@@ -8,10 +8,10 @@
 package fitnesstimer.controllers;
 
 import fitnesstimer.component.Countdown;
+import fitnesstimer.component.Timer;
 import fitnesstimer.controllers.base.AbstractController;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,7 +32,7 @@ public class TimeDashboardController extends AbstractController {
     private Label label;
 
     private static final short COUNTDOWN_RATE = 5;
-    private Countdown timer;
+    private Timer timer;
 
     private enum ActivityKind {
         EXERCISE_RUN, EXERCISE_REST, TRACK_REST, FINISHED
@@ -50,9 +50,7 @@ public class TimeDashboardController extends AbstractController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        timer = new Countdown(0,2,0,0,COUNTDOWN_RATE);
-        label.textProperty().bind(timer.getStringBinding());
-
+        timer = new Countdown(0, 0, 15, 0);
         timer.finishedProperty().addListener((_val, _old, isZero) -> {
             if (isZero) {
                 nextActivity();
@@ -60,6 +58,9 @@ public class TimeDashboardController extends AbstractController {
                 // TODO: warnings
             }
         });
+
+        // TODO: launch group selector
+        this.plan = db.getGym().getTiposSesion().get(0);
 
         setupSession();
 
@@ -125,15 +126,13 @@ public class TimeDashboardController extends AbstractController {
             case FINISHED:
             default:
                 i18n.bind(label, "phase.finished");
-                timer.setToZero();
+                timer.finish();
                 return;
         }
 
+        System.out.println(label.textProperty());
         i18n.bind(label, descKey, track, exercise);
-        timer = new Countdown(
-                TimeUnit.SECONDS.toMillis(duration),
-                COUNTDOWN_RATE
-        );
+        timer.reset();
     }
 
     private void setupSession() {
@@ -147,7 +146,7 @@ public class TimeDashboardController extends AbstractController {
     private void onNext(ActionEvent event) {
         nextActivity();
     }
-
+    
     @FXML
     private void onPause(ActionEvent event) {
         timer.pause();
