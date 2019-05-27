@@ -7,10 +7,14 @@
  */
 package fitnesstimer.component;
 
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.util.Duration;
 
 /**
  *
@@ -29,7 +33,21 @@ public class Countdown implements Timer {
     Timeline time;
     
     public Countdown(int hours, int mins, int secs, int millis) {
-        // TODO: init timeline
+        this.time = new Timeline(
+            new KeyFrame(
+                    Duration.millis(1),
+                    event -> tick()
+            )
+        );
+        
+        this.millis = new SimpleIntegerProperty(millis);
+        this.secs = new SimpleIntegerProperty(secs);
+        this.mins = new SimpleIntegerProperty(mins);
+        this.hours = new SimpleIntegerProperty(hours);
+        
+        this.paused = new SimpleBooleanProperty(true);
+        this.finished = new SimpleBooleanProperty(false);
+        
         setDuration(hours, mins, secs, millis);
     }
     
@@ -138,5 +156,23 @@ public class Countdown implements Timer {
                 return String.valueOf(value.get());
             }
         };
+    }
+    
+    private void tick() {
+        if (decrementOne(millis)) return;
+        if (decrementOne(secs)) return;
+        if (decrementOne(mins)) return;
+        decrementOne(hours);
+    }
+    
+    private boolean decrementOne(IntegerProperty value) {
+        int val = value.get();
+        val--;
+        boolean passedZero = val < 0;
+        if (passedZero) {
+            val = 0;
+        }
+        value.set(val);
+        return !passedZero;
     }
 }
