@@ -7,142 +7,136 @@
  */
 package fitnesstimer.component;
 
-import java.util.concurrent.TimeUnit;
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.util.Duration;
+import javafx.beans.property.IntegerProperty;
 
 /**
  *
  * @author Dani
  */
-public class Countdown {
+public class Countdown implements Timer {
+
+    IntegerProperty millis;
+    IntegerProperty secs;
+    IntegerProperty mins;
+    IntegerProperty hours;
     
-    private final short rate;
-    private final Timeline timeline;
-    private boolean paused;
-    private BooleanProperty finished;
+    BooleanProperty paused;
+    BooleanProperty finished;
     
-    private LongProperty value;
+    Timeline time;
     
-    public Countdown(
-            int hours, 
-            int minutes, 
-            int seconds, 
-            int millis, 
-            short updateRate
-    ) {
-        this(toMillis(hours, minutes, seconds, millis), updateRate);
+    public Countdown(int hours, int mins, int secs, int millis) {
+        // TODO: init timeline
+        setDuration(hours, mins, secs, millis);
     }
     
-    public Countdown(long millis, short updateRate) {
-        this.rate = updateRate;
-        this.value = new SimpleLongProperty(millis);
-        this.paused = true;
-        this.finished = new SimpleBooleanProperty(false);
-        
-        timeline = new Timeline(
-                new KeyFrame(Duration.millis(rate), (e) -> { 
-                    decrement();
-                })
-        );
-        timeline.setAutoReverse(false);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-    }
-    
+    @Override
     public void resume() {
-        if (!finished.get()) {
-            timeline.play();
+        if (!isFinished()) {
+            paused.set(false);
+            time.play();
         }
     }
     
+    @Override
     public void pause() {
-        paused = true;
-        timeline.pause();
+        time.pause();
+        paused.set(true);
     }
     
+    @Override
     public void reset() {
-        paused = false;
-        timeline.stop();
+        time.stop();
+        paused.set(true);
+        finished.set(false);
     }
     
-    public void toggle() {
-        if (paused) {
-            resume();
-        } else {
-            pause();
-        }
+    @Override
+    public IntegerProperty millisProperty() {
+        return millis;
     }
     
-    public boolean isPaused() {
-        return paused;
+    @Override
+    public IntegerProperty secsProperty() {
+        return secs;
     }
     
+    @Override
+    public IntegerProperty minsProperty() {
+        return mins;
+    }
+    
+    @Override
+    public IntegerProperty hoursProperty() {
+        return hours;
+    }
+    
+    @Override
+    public final void setDuration(int hours, int mins, int secs, int millis) {
+        pause();
+        
+        assert hours >= 0;
+        assert mins >= 0 && mins < 60;
+        assert secs >= 0 && secs < 60;
+        assert millis >= 0 && millis < 1000;
+        
+        this.hours.set(hours);
+        this.mins.set(mins);
+        this.secs.set(secs);
+        this.millis.set(millis);
+        
+        reset();
+    }
+    
+    @Override
+    public void finish() {
+        pause();
+        setDuration(0, 0, 0, 0);
+        finished.set(true);
+    }
+    
+    @Override
     public BooleanProperty finishedProperty() {
         return finished;
     }
     
-    public boolean isFinished() {
-        return finishedProperty().get();
+    @Override
+    public BooleanProperty pausedProperty() {
+        return paused;
     }
     
-    public void setToZero() {
-        finished.set(true);
-        timeline.pause();
-        value.set(0);
+    @Override
+    public StringBinding getMillisBinding() {
+        return makeStringBinding(millis);
     }
     
-    public StringBinding getStringBinding() {
+    @Override
+    public StringBinding getSecsBinding() {
+        return makeStringBinding(secs);
+    }
+    
+    @Override
+    public StringBinding getMinsBinding() {
+        return makeStringBinding(mins);
+    }
+    
+    @Override
+    public StringBinding getHoursBinding() {
+        return makeStringBinding(hours);
+    }
+    
+    private StringBinding makeStringBinding(IntegerProperty value) {
         return new StringBinding() {
             
             { bind(value); }
             
             @Override
             public String computeValue() {
-                return getStringValue();
+                return String.valueOf(value.get());
             }
         };
-    }
-    
-    public String getStringValue() {
-        long millis = value.get();
-        long hrs = TimeUnit.MILLISECONDS.toHours(millis);
-        millis -= TimeUnit.HOURS.toMillis(hrs);
-        long mins = TimeUnit.MILLISECONDS.toMinutes(millis);
-        millis -= TimeUnit.MINUTES.toMillis(mins);
-        long secs = TimeUnit.MILLISECONDS.toSeconds(millis);
-        millis -= TimeUnit.SECONDS.toMillis(secs);
-        
-        return String.format("%02d:%02d:%02d.%03d", hrs, mins, secs, millis);
-    }
-    
-    public LongProperty valueProperty() {
-        return value;
-    }
-    
-    public long getValue() {
-        return valueProperty().get();
-    }
-    
-    private static long toMillis(int hrs, int mins, int secs, int millis) {
-        return millis 
-                + secs * 1000
-                + mins * 60 * 1000
-                + hrs * 60 * 60 * 1000;
-    }
-    
-    private void decrement() {
-        long current = value.get();
-        current -= rate;
-        if (current <= 0) {
-            setToZero();
-        } else {
-            value.set(current);
-        }
     }
 }
