@@ -16,9 +16,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="500.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.SessionFormController">
+<BorderPane prefHeight="423.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/8.0.171" stylesheets="@../resources/css/style.css"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.SessionFormController">
    <bottom>
-      <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="568.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <HBox alignment="BOTTOM_RIGHT" prefHeight="82.0" prefWidth="401.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#onCancel" text="Retroceder">
                <font>
@@ -37,191 +37,211 @@
       </HBox>
    </bottom>
    <center>
-      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="412.0" prefWidth="863.0" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="387.0" prefWidth="398.0" BorderPane.alignment="CENTER">
          <children>
             <Text fontSmoothingType="LCD" layoutX="26.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-up" text="Configuración de la sesión">
                <font>
                   <Font name="Microsoft Sans Serif" size="16.0" />
                </font>
             </Text>
-            <Line endX="391.0" layoutX="135.0" layoutY="37.0" startX="-120.0" />
-            <VBox layoutX="13.0" layoutY="45.0" prefHeight="357.0" prefWidth="522.0">
+            <Line endX="317.0" layoutX="135.0" layoutY="37.0" startX="-120.0" />
+            <GridPane layoutX="26.0" layoutY="55.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="314.0" prefWidth="449.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="334.0" minWidth="68.0" prefWidth="185.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="349.0" minWidth="100.0" prefWidth="264.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints />
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="314.0" prefWidth="481.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="68.0" prefWidth="189.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="292.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints />
-                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Código">
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="13.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1">
-                           <children>
-                              <TextField fx:id="codeField" alignment="BASELINE_LEFT" prefHeight="26.0" prefWidth="226.0" styleClass="text-id-sub">
-                                 <VBox.margin>
-                                    <Insets right="10.0" top="18.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Microsoft Sans Serif" size="13.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="codeErrorField" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
-                           </children>
-                        </VBox>
-                        <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Nº de circuitos" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="13.0" />
-                           </font>
-                        </Text>
-                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <children>
-                              <TextField fx:id="tracksField" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="109.0" styleClass="text-id-sub">
-                                 <VBox.margin>
-                                    <Insets right="10.0" top="18.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Microsoft Sans Serif" size="13.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="tracksErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
-                           </children>
-                        </VBox>
-                        <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Nº de ejercicios por circuito" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="13.0" />
-                           </font>
-                        </Text>
-                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                           <children>
-                              <TextField fx:id="exercisesField" alignment="BASELINE_LEFT" prefHeight="25.0" prefWidth="109.0" styleClass="text-id-sub">
-                                 <VBox.margin>
-                                    <Insets right="10.0" top="18.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Microsoft Sans Serif" size="13.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="exercisesErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
-                           </children>
-                        </VBox>
-                        <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Tiempo por ejercicio" GridPane.rowIndex="4">
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="13.0" />
-                           </font>
-                        </Text>
-                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <children>
-                              <TextField fx:id="exerciseTimeField" alignment="BASELINE_LEFT" prefWidth="110.0" styleClass="text-id-sub">
-                                 <VBox.margin>
-                                    <Insets right="10.0" top="18.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Microsoft Sans Serif" size="13.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="exerciseTimeErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
-                           </children>
-                        </VBox>
-                        <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Tiempo de calentamiento " GridPane.rowIndex="5">
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="13.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                           <children>
-                              <TextField fx:id="warmupTimeField" alignment="BASELINE_LEFT" prefWidth="110.0" styleClass="text-id-sub">
-                                 <VBox.margin>
-                                    <Insets right="10.0" top="18.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Microsoft Sans Serif" size="13.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="warmupTimeErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
-                           </children>
-                        </VBox>
-                        <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Descanso entre ejercicios" GridPane.rowIndex="6">
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="13.0" />
-                           </font>
-                        </Text>
-                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="75.0" prefWidth="275.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                           <children>
-                              <TextField fx:id="exerciseRestTimeField" alignment="BASELINE_LEFT" prefWidth="110.0" styleClass="text-id-sub">
-                                 <VBox.margin>
-                                    <Insets right="10.0" top="18.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Microsoft Sans Serif" size="13.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="exerciseRestTimeErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
-                           </children>
-                        </VBox>
-                        <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Descanso entre circuitos " GridPane.rowIndex="7">
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="13.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="10.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="75.0" prefWidth="275.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                           <children>
-                              <TextField fx:id="trackRestTimeField" alignment="BASELINE_LEFT" prefWidth="110.0" styleClass="text-id-sub">
-                                 <VBox.margin>
-                                    <Insets right="10.0" top="18.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Microsoft Sans Serif" size="13.0" />
-                                 </font>
-                              </TextField>
-                              <Label fx:id="trackRestTimeErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </GridPane>
-                  <Label text="*Todos los tiempos deben estar en segundos">
-                     <padding>
-                        <Insets left="10.0" top="10.0" />
-                     </padding>
+                  <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Nº de circuitos">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
                      <font>
-                        <Font name="Microsoft Sans Serif" size="12.0" />
+                        <Font name="Microsoft Sans Serif" size="13.0" />
                      </font>
-                  </Label>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <TextField fx:id="tracksField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="109.0" styleClass="text-id-sub">
+                                 <font>
+                                    <Font name="Microsoft Sans Serif" size="11.0" />
+                                 </font>
+                              </TextField>
+                              <Label text="/s">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </HBox>
+                        <Label fx:id="tracksErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
+                  <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Nº de ejercicios por circuito" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="13.0" />
+                     </font>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <TextField fx:id="exercisesField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="109.0" styleClass="text-id-sub">
+                                 <font>
+                                    <Font name="Microsoft Sans Serif" size="11.0" />
+                                 </font>
+                              </TextField>
+                              <Label text="/s">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </HBox>
+                        <Label fx:id="exercisesErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
+                  <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Tiempo por ejercicio" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="13.0" />
+                     </font>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <TextField fx:id="exerciseTimeField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
+                                 <font>
+                                    <Font name="Microsoft Sans Serif" size="11.0" />
+                                 </font>
+                              </TextField>
+                              <Label text="/s">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </HBox>
+                        <Label fx:id="exerciseTimeErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
+                  <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Tiempo de calentamiento " GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="13.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <TextField fx:id="warmupTimeField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
+                                 <font>
+                                    <Font name="Microsoft Sans Serif" size="11.0" />
+                                 </font>
+                              </TextField>
+                              <Label text="/s">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </HBox>
+                        <Label fx:id="warmupTimeErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
+                  <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Descanso entre ejercicios" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="13.0" />
+                     </font>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <TextField fx:id="exerciseRestTimeField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
+                                 <font>
+                                    <Font name="Microsoft Sans Serif" size="11.0" />
+                                 </font>
+                              </TextField>
+                              <Label text="/s">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </HBox>
+                        <Label fx:id="exerciseRestTimeErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
+                  <Text fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id-sub" text="Descanso entre circuitos " GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="13.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <VBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <TextField fx:id="trackRestTimeField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
+                                 <font>
+                                    <Font name="Microsoft Sans Serif" size="11.0" />
+                                 </font>
+                              </TextField>
+                              <Label text="/s">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </HBox>
+                        <Label fx:id="trackRestTimeErrorLabel" alignment="CENTER_RIGHT" textFill="RED" visible="false" />
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
+            </GridPane>
          </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
