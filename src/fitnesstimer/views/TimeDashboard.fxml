@@ -90,82 +90,81 @@
          </children>
       </HBox>
    </bottom>
-   <left>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="469.0" prefWidth="221.0" BorderPane.alignment="CENTER">
-         <children>
-            <GridPane prefHeight="81.0" prefWidth="196.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Circuito ">
-                     <font>
-                        <Font name="Microsoft Sans Serif" size="24.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="X " GridPane.columnIndex="1">
-                     <font>
-                        <Font name="Microsoft Sans Serif" size="24.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ejercicio" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Microsoft Sans Serif" size="24.0" />
-                     </font>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="X" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Microsoft Sans Serif" size="24.0" />
-                     </font>
-                  </Text>
-               </children>
-            </GridPane>
-         </children>
-         <padding>
-            <Insets left="25.0" top="25.0" />
-         </padding>
-      </VBox>
-   </left>
-   <right>
-      <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="469.0" prefWidth="223.0" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-         <padding>
-            <Insets top="35.0" />
-         </padding>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Grupo ">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="24.0" />
-               </font>
-            </Text>
-            <Text fx:id="numGroupText" strokeType="OUTSIDE" strokeWidth="0.0" text="X">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="24.0" />
-               </font>
-            </Text>
-         </children>
-      </HBox>
-   </right>
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="TOP_CENTER" prefHeight="15.0" prefWidth="294.0">
+            <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <Label text="¡Mueve el cuerpo!">
-                     <font>
-                        <Font name="Microsoft Sans Serif" size="24.0" />
-                     </font>
-                  </Label>
+                  <HBox alignment="CENTER" prefHeight="15.0" prefWidth="294.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="statusLabel" text="¡Mueve el cuerpo!">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Circuito">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="trackNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="X ">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.rowIndex="1">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ejercicio">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="exerciseNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="X">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Grupo">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="24.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="groupNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="X">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="573.0" prefWidth="294.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+            </GridPane>
+            <HBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                <children>
                   <Text fx:id="minutes" strokeType="OUTSIDE" strokeWidth="0.0" text="00" HBox.hgrow="ALWAYS">
                      <font>
@@ -182,14 +181,14 @@
                         <Font name="Microsoft Sans Serif" size="72.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text=":">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="." translateY="-10.0">
                      <font>
-                        <Font name="Microsoft Sans Serif" size="72.0" />
+                        <Font name="Microsoft Sans Serif" size="48.0" />
                      </font>
                   </Text>
-                  <Text fx:id="miliSeconds" strokeType="OUTSIDE" strokeWidth="0.0" text="00">
+                  <Text fx:id="millis" strokeType="OUTSIDE" strokeWidth="0.0" text="000" translateY="-10.0">
                      <font>
-                        <Font name="Microsoft Sans Serif" size="72.0" />
+                        <Font name="Microsoft Sans Serif" size="48.0" />
                      </font>
                   </Text>
                </children>

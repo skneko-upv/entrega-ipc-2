@@ -13,10 +13,12 @@ import fitnesstimer.controllers.base.AbstractController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 import modelo.SesionTipo;
 
 /**
@@ -27,15 +29,32 @@ import modelo.SesionTipo;
 public class TimeDashboardController extends AbstractController {
 
     @FXML
-    private Button button;
+    private Button restartExerciseBtn;
     @FXML
-    private Label label;
+    private Button resumeBtn;
+    @FXML
+    private Button pauseBtn;
+    @FXML
+    private Button nextExerciseBtn;
+    @FXML
+    private Label statusLabel;
+    @FXML
+    private Text trackNumber;
+    @FXML
+    private Text exerciseNumber;
+    @FXML
+    private Text groupNumber;
+    @FXML
+    private Text minutes;
+    @FXML
+    private Text seconds;
+    @FXML
+    private Text millis;
 
-    private static final short COUNTDOWN_RATE = 5;
     private Timer timer;
 
     private enum ActivityKind {
-        EXERCISE_RUN, EXERCISE_REST, TRACK_REST, FINISHED
+        WARM_UP, EXERCISE_RUN, EXERCISE_REST, TRACK_REST, FINISHED
     }
 
     private SesionTipo plan;
@@ -59,12 +78,21 @@ public class TimeDashboardController extends AbstractController {
             }
         });
 
+        minutes.textProperty().bind(Bindings.format("%02d", timer.getMinsBinding()));
+        seconds.textProperty().bind(Bindings.format("%02d", timer.getSecsBinding()));
+        millis.textProperty().bind(Bindings.format("%03d", timer.getMillisBinding()));
+
         // TODO: launch group selector
-        this.plan = db.getGym().getTiposSesion().get(0);
+        this.plan = db.getGym().getTiposSesion().get(2);
+        System.out.println(String.format(
+                            "[%s] %dx%d %ds",
+                            plan.getCodigo(),
+                            plan.getNum_circuitos(),
+                            plan.getNum_ejercicios(),
+                            plan.getT_ejercicio()
+                    ));
 
         setupSession();
-
-        // TODO
     }
 
     private void nextActivity() {
@@ -75,16 +103,22 @@ public class TimeDashboardController extends AbstractController {
 
     private void prepareNextActivity() {
         switch (phase) {
-            case EXERCISE_RUN:
-                phase = ActivityKind.EXERCISE_REST;
+            case WARM_UP:
+                track = 1;
+                exercise = 1;
+                phase = ActivityKind.EXERCISE_RUN;
                 break;
 
-            case EXERCISE_REST:
+            case EXERCISE_RUN:
                 if (exercise >= plan.getNum_ejercicios()) {  // if last exercise in track
                     phase = ActivityKind.TRACK_REST;
                     return;
                 }
+                
+                phase = ActivityKind.EXERCISE_REST;
+                break;
 
+            case EXERCISE_REST:
                 phase = ActivityKind.EXERCISE_RUN;
                 exercise++;
                 break;
@@ -111,6 +145,10 @@ public class TimeDashboardController extends AbstractController {
         String descKey;
 
         switch (phase) {
+            case WARM_UP:
+                duration = plan.getT_calentamiento();
+                descKey = "phase.warmup";
+                break;
             case EXERCISE_RUN:
                 duration = plan.getT_ejercicio();
                 descKey = "phase.exerciseRun";
@@ -125,20 +163,27 @@ public class TimeDashboardController extends AbstractController {
                 break;
             case FINISHED:
             default:
-                i18n.bind(label, "phase.finished");
+                i18n.bind(statusLabel, "phase.finished");
                 timer.finish();
                 return;
         }
 
-        System.out.println(label.textProperty());
-        i18n.bind(label, descKey, track, exercise);
+        i18n.bind(statusLabel, descKey, track, exercise);
+        trackNumber.setText(String.valueOf(track));
+        exerciseNumber.setText(String.valueOf(exercise));
+        // TODO: hide numbers during warmup
+        
+        int h = duration / 3600;
+        int m = (duration % 3600) / 60;
+        int s = duration % 60;
+        timer.setDuration(h, m, s, 0);
         timer.reset();
     }
 
     private void setupSession() {
-        track = 1;
-        exercise = 1;
-        phase = ActivityKind.EXERCISE_RUN;
+        track = 0;
+        exercise = 0;
+        phase = ActivityKind.WARM_UP;
         setupScene();
     }
 
@@ -146,7 +191,7 @@ public class TimeDashboardController extends AbstractController {
     private void onNext(ActionEvent event) {
         nextActivity();
     }
-    
+
     @FXML
     private void onPause(ActionEvent event) {
         timer.pause();
@@ -157,7 +202,6 @@ public class TimeDashboardController extends AbstractController {
         timer.resume();
     }
 
-    @FXML
     private void onTogglePause(ActionEvent event) {
         if (timer.isPaused()) {
             onResume(event);
@@ -168,17 +212,15 @@ public class TimeDashboardController extends AbstractController {
 
     @FXML
     private void onResetCurrent(ActionEvent event) {
-        timer.pause();
+        timer.reset();
         setupScene();
     }
 
-    @FXML
     private void onResetSession(ActionEvent event) {
         timer.pause();
         setupSession();
     }
 
-    @FXML
     private void onQuit(ActionEvent event) {
         Platform.exit();
         System.exit(0);
