@@ -113,7 +113,23 @@ public class SessionSelectorController extends AbstractController {
 
     @FXML
     private void onShowHistory(ActionEvent event) {
-        // TODO
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fitnesstimer/views/GroupHistory.fxml"));
+            Parent root = loader.load();
+
+            GroupHistoryController controller = loader.<GroupHistoryController>getController();
+            controller.setup(group);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.titleProperty().bind(i18n.getStringBinding("groupHistory.window.title"));
+            stage.setScene(scene);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.showAndWait();
+        } catch (IOException e) {
+            System.err.println("Cannot launch group history: " + e);
+        }
     }
 
     @FXML
