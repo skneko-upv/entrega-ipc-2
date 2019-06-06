@@ -12,6 +12,8 @@ import fitnesstimer.component.Timer;
 import fitnesstimer.controllers.base.AbstractController;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -26,6 +28,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Grupo;
+import modelo.Sesion;
 import modelo.SesionTipo;
 
 /**
@@ -61,6 +64,8 @@ public class TimeDashboardController extends AbstractController {
     private Stage ownStage;
 
     private Timer timer;
+    private LocalDateTime startTime;
+    private long startEpoch;
 
     private enum ActivityKind {
         WARM_UP, EXERCISE_RUN, EXERCISE_REST, TRACK_REST, FINISHED
@@ -124,6 +129,9 @@ public class TimeDashboardController extends AbstractController {
     public void setupSession(Grupo group, SesionTipo plan) {
         this.group = group;
         this.plan = plan;
+        
+        groupNumber.setText(group.getCodigo());
+        
         setupSession();
     }
 
@@ -195,16 +203,27 @@ public class TimeDashboardController extends AbstractController {
                 break;
             case FINISHED:
             default:
-                sessionFinished = true;
                 i18n.bind(statusLabel, "phase.finished");
-                timer.finish();
+                if (!sessionFinished) {
+                    sessionFinished = true;
+                    timer.finish();
+                    
+                    int i = db.getGym().getGrupos().indexOf(group);
+                    if (i >= 0 && i < db.getGym().getGrupos().size()) {
+                        Sesion s = new Sesion();
+                        s.setDuracion(Duration.ofMillis(System.currentTimeMillis() - startEpoch));
+                        s.setFecha(startTime);
+                        s.setTipo(plan);
+                        db.getGym().getGrupos().get(i).getSesiones().add(s);
+                        db.salvar();
+                    }
+                }
                 return;
         }
 
         i18n.bind(statusLabel, descKey, track, exercise);
         trackNumber.setText(String.valueOf(track));
         exerciseNumber.setText(String.valueOf(exercise));
-        // TODO: hide numbers during warmup
 
         int h = duration / 3600;
         int m = (duration % 3600) / 60;
@@ -214,6 +233,8 @@ public class TimeDashboardController extends AbstractController {
     }
 
     private void setupSession() {
+        this.startTime = LocalDateTime.now();
+        this.startEpoch = System.currentTimeMillis();
         this.sessionFinished = false;
         track = 0;
         exercise = 0;

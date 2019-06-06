@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Grupo;
@@ -34,16 +35,30 @@ import modelo.SesionTipo;
  * @author Dani
  */
 public class SessionSelectorController extends AbstractController {
-
+    
+    @FXML
+    private Button prevBtn;
+    @FXML
+    private Button nextBtn;
     @FXML
     private ListView<SesionTipo> plansView;
     @FXML
-    private Button nextBtn;
+    private TextField tracksNumber;
+    @FXML
+    private TextField exerciseNumber;
+    @FXML
+    private TextField exerciseTime;
+    @FXML
+    private TextField warmUpTime;
+    @FXML
+    private TextField restTimeExercise;
+    @FXML
+    private TextField restTimeTrack;
 
     private Grupo group;
     private ObservableList<SesionTipo> plans;
     private TimeDashboardController dashboard;
-
+    
     /**
      * Initializes the controller class.
      * @param url Not used
@@ -73,13 +88,22 @@ public class SessionSelectorController extends AbstractController {
                 Bindings.isNull(plansView.getSelectionModel().selectedItemProperty())
         );
         
+        plansView.getSelectionModel().selectedItemProperty().addListener((_val, _oldVal, selected) -> {
+            if (selected != null) {
+                tracksNumber.setText(String.valueOf(selected.getNum_circuitos()));
+                exerciseNumber.setText(String.valueOf(selected.getNum_ejercicios()));
+                exerciseTime.setText(String.valueOf(selected.getT_ejercicio()));
+                warmUpTime.setText(String.valueOf(selected.getT_calentamiento()));
+                restTimeExercise.setText(String.valueOf(selected.getD_ejercicio()));
+                restTimeTrack.setText(String.valueOf(selected.getD_circuito()));
+            }
+        });
+        
         try {
             plansView.getSelectionModel().select(group.getDefaultTipoSesion());
         } catch (Exception e) {
             System.err.println("Cannot select default plan of selected group: " + e);
         }
-        
-        // TODO
     }
 
     public void setup(TimeDashboardController dashboard, Grupo group) {
