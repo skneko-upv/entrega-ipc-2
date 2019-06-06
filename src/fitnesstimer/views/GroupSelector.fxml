@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="300.0" minWidth="300.0" prefHeight="500.0" prefWidth="651.0" stylesheets="@../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.GroupSelectorController">
+<BorderPane minHeight="300.0" minWidth="300.0" prefHeight="500.0" prefWidth="651.0" stylesheets="@../resources/css/styleN.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.GroupSelectorController">
    <center>
       <ListView fx:id="groupsView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>

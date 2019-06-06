@@ -29,10 +29,10 @@
          <children>
             <LineChart legendSide="LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
               <xAxis>
-                <CategoryAxis label="Sesiones" />
+                <CategoryAxis label="Sesiones" styleClass="chart" />
               </xAxis>
               <yAxis>
-                <NumberAxis label="Tiempo" side="TOP" />
+                <NumberAxis label="Tiempo" side="TOP" styleClass="chart" />
               </yAxis>
             </LineChart>
             <HBox prefHeight="62.0" prefWidth="691.0">
