@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="423.0" prefWidth="419.0" stylesheets="@../resources/css/styleN.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.SessionFormController">
+<BorderPane prefHeight="423.0" prefWidth="419.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.SessionFormController">
    <bottom>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="82.0" prefWidth="401.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -127,7 +127,7 @@
                                     <Font name="Microsoft Sans Serif" size="11.0" />
                                  </font>
                               </TextField>
-                              <Label text="s">
+                              <Label text="/s">
                                  <padding>
                                     <Insets top="5.0" />
                                  </padding>
@@ -157,7 +157,7 @@
                                     <Font name="Microsoft Sans Serif" size="11.0" />
                                  </font>
                               </TextField>
-                              <Label text="s">
+                              <Label text="/s">
                                  <padding>
                                     <Insets top="5.0" />
                                  </padding>
@@ -187,7 +187,7 @@
                                     <Font name="Microsoft Sans Serif" size="11.0" />
                                  </font>
                               </TextField>
-                              <Label text="s">
+                              <Label text="/s">
                                  <padding>
                                     <Insets top="5.0" />
                                  </padding>
@@ -217,7 +217,7 @@
                                     <Font name="Microsoft Sans Serif" size="11.0" />
                                  </font>
                               </TextField>
-                              <Label text="s">
+                              <Label text="/s">
                                  <padding>
                                     <Insets top="5.0" />
                                  </padding>

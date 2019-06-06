@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="738.0" stylesheets="@../resources/css/styleN.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.TimeDashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="594.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.TimeDashboardController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -29,19 +29,29 @@
                   <MenuItem mnemonicParsing="false" text="Salir" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Volúmen">
+            <Menu mnemonicParsing="false" text="Configuración">
               <items>
-                  <CheckMenuItem mnemonicParsing="false" selected="true" text="100 %" />
-                  <CheckMenuItem mnemonicParsing="false" text="90 %" />
-                  <CheckMenuItem mnemonicParsing="false" text="80 %" />
-                  <CheckMenuItem mnemonicParsing="false" text="70 %" />
-                  <CheckMenuItem mnemonicParsing="false" text="60 %" />
-                  <CheckMenuItem mnemonicParsing="false" text="50 %" />
-                  <CheckMenuItem mnemonicParsing="false" text="40 %" />
-                  <CheckMenuItem mnemonicParsing="false" text="30 %" />
-                  <CheckMenuItem mnemonicParsing="false" text="20 %" />
-                  <CheckMenuItem mnemonicParsing="false" text="10 %" />
-                  <CheckMenuItem mnemonicParsing="false" text=" 0 %" />
+                  <Menu mnemonicParsing="false" text="Modo">
+                     <items>
+                        <CheckMenuItem mnemonicParsing="false" text="Diurno" />
+                        <CheckMenuItem mnemonicParsing="false" text="Nocturno" />
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Volúmen">
+                    <items>
+                        <CheckMenuItem mnemonicParsing="false" selected="true" text="100 %" />
+                        <CheckMenuItem mnemonicParsing="false" text="90 %" />
+                        <CheckMenuItem mnemonicParsing="false" text="80 %" />
+                        <CheckMenuItem mnemonicParsing="false" text="70 %" />
+                        <CheckMenuItem mnemonicParsing="false" text="60 %" />
+                        <CheckMenuItem mnemonicParsing="false" text="50 %" />
+                        <CheckMenuItem mnemonicParsing="false" text="40 %" />
+                        <CheckMenuItem mnemonicParsing="false" text="30 %" />
+                        <CheckMenuItem mnemonicParsing="false" text="20 %" />
+                        <CheckMenuItem mnemonicParsing="false" text="10 %" />
+                        <CheckMenuItem mnemonicParsing="false" text=" 0 %" />
+                    </items>
+                  </Menu>
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Ayuda">
