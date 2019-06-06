@@ -61,6 +61,7 @@ public class TimeDashboardController extends AbstractController {
     private int track;
     private int exercise;
     private ActivityKind phase;
+    private boolean sessionFinished;
 
     /**
      * Initializes the controller class.
@@ -70,8 +71,8 @@ public class TimeDashboardController extends AbstractController {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         timer = new Countdown(0, 0, 15, 0);
-        timer.finishedProperty().addListener((_val, _old, isZero) -> {
-            if (isZero) {
+        timer.finishedProperty().addListener((_val, wasZero, isNowZero) -> {
+            if (!sessionFinished && !wasZero && isNowZero) {    // timer just reached zero
                 nextActivity();
                 timer.resume();
                 // TODO: warnings
@@ -163,6 +164,7 @@ public class TimeDashboardController extends AbstractController {
                 break;
             case FINISHED:
             default:
+                sessionFinished = true;
                 i18n.bind(statusLabel, "phase.finished");
                 timer.finish();
                 return;
@@ -181,6 +183,7 @@ public class TimeDashboardController extends AbstractController {
     }
 
     private void setupSession() {
+        this.sessionFinished = false;
         track = 0;
         exercise = 0;
         phase = ActivityKind.WARM_UP;
@@ -189,17 +192,23 @@ public class TimeDashboardController extends AbstractController {
 
     @FXML
     private void onNext(ActionEvent event) {
-        nextActivity();
+        if (!sessionFinished) {
+            nextActivity();
+        }
     }
 
     @FXML
     private void onPause(ActionEvent event) {
-        timer.pause();
+        if (!sessionFinished) {
+            timer.pause();
+        }
     }
 
     @FXML
     private void onResume(ActionEvent event) {
-        timer.resume();
+        if (!sessionFinished) {
+            timer.resume();
+        }
     }
 
     private void onTogglePause(ActionEvent event) {
@@ -212,12 +221,14 @@ public class TimeDashboardController extends AbstractController {
 
     @FXML
     private void onResetCurrent(ActionEvent event) {
-        timer.reset();
-        setupScene();
+        if (!sessionFinished) {
+            timer.reset();
+            setupScene();
+        }
     }
 
     private void onResetSession(ActionEvent event) {
-        timer.pause();
+        if (!sessionFinished) timer.pause();
         setupSession();
     }
 
