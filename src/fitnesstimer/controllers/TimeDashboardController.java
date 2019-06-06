@@ -117,6 +117,8 @@ public class TimeDashboardController extends AbstractController {
         } catch (IOException e) {
             System.err.println("Cannot launch session setup: " + e);
         }
+        
+        if (plan == null) { System.exit(0); }
     }
     
     public void setupSession(Grupo group, SesionTipo plan) {
