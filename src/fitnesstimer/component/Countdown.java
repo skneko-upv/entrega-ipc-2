@@ -9,7 +9,7 @@ package fitnesstimer.component;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.binding.StringBinding;
+import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -39,6 +39,8 @@ public class Countdown implements Timer {
                     event -> tick()
             )
         );
+        this.time.setAutoReverse(false);
+        this.time.setCycleCount(Timeline.INDEFINITE);
         
         this.millis = new SimpleIntegerProperty(millis);
         this.secs = new SimpleIntegerProperty(secs);
@@ -47,8 +49,6 @@ public class Countdown implements Timer {
         
         this.paused = new SimpleBooleanProperty(true);
         this.finished = new SimpleBooleanProperty(false);
-        
-        setDuration(hours, mins, secs, millis);
     }
     
     @Override
@@ -93,7 +93,7 @@ public class Countdown implements Timer {
     }
     
     @Override
-    public final void setDuration(int hours, int mins, int secs, int millis) {
+    public void setDuration(int hours, int mins, int secs, int millis) {
         pause();
         
         assert hours >= 0;
@@ -127,50 +127,51 @@ public class Countdown implements Timer {
     }
     
     @Override
-    public StringBinding getMillisBinding() {
-        return makeStringBinding(millis);
+    public IntegerBinding getMillisBinding() {
+        return makeIntegerBinding(millis);
     }
     
     @Override
-    public StringBinding getSecsBinding() {
-        return makeStringBinding(secs);
+    public IntegerBinding getSecsBinding() {
+        return makeIntegerBinding(secs);
     }
     
     @Override
-    public StringBinding getMinsBinding() {
-        return makeStringBinding(mins);
+    public IntegerBinding getMinsBinding() {
+        return makeIntegerBinding(mins);
     }
     
     @Override
-    public StringBinding getHoursBinding() {
-        return makeStringBinding(hours);
+    public IntegerBinding getHoursBinding() {
+        return makeIntegerBinding(hours);
     }
     
-    private StringBinding makeStringBinding(IntegerProperty value) {
-        return new StringBinding() {
+    private IntegerBinding makeIntegerBinding(IntegerProperty value) {
+        return new IntegerBinding() {
             
             { bind(value); }
             
             @Override
-            public String computeValue() {
-                return String.valueOf(value.get());
+            public int computeValue() {
+                return value.get();
             }
         };
     }
     
     private void tick() {
-        if (decrementOne(millis)) return;
-        if (decrementOne(secs)) return;
-        if (decrementOne(mins)) return;
-        decrementOne(hours);
+        if (decrementOneOrCycle(millis, 1000)) return;
+        if (decrementOneOrCycle(secs, 60)) return;
+        if (decrementOneOrCycle(mins, 60)) return;
+        if (decrementOneOrCycle(hours, 0)) return;
+        finish();
     }
     
-    private boolean decrementOne(IntegerProperty value) {
+    private boolean decrementOneOrCycle(IntegerProperty value, int max) {
         int val = value.get();
         val--;
         boolean passedZero = val < 0;
         if (passedZero) {
-            val = 0;
+            val = max - 1;
         }
         value.set(val);
         return !passedZero;
