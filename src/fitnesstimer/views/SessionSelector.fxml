@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="521.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/8.0.171" stylesheets="@../resources/css/style.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.SessionSelectorController">
+<BorderPane prefHeight="521.0" prefWidth="664.0" stylesheets="@../resources/css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fitnesstimer.controllers.SessionSelectorController">
    <center>
       <GridPane prefHeight="521.0" prefWidth="244.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -85,7 +85,7 @@
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
                         </TextField>
-                        <Label text="/s">
+                        <Label text="s">
                            <font>
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
@@ -113,7 +113,7 @@
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
                         </TextField>
-                        <Label text="/s">
+                        <Label text="s">
                            <font>
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
@@ -141,7 +141,7 @@
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
                         </TextField>
-                        <Label text="/s">
+                        <Label text="s">
                            <font>
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
@@ -169,7 +169,7 @@
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
                         </TextField>
-                        <Label text="/s">
+                        <Label text="s">
                            <font>
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
@@ -197,7 +197,7 @@
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
                         </TextField>
-                        <Label text="/s">
+                        <Label text="s">
                            <font>
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
@@ -225,7 +225,7 @@
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
                         </TextField>
-                        <Label text="/s">
+                        <Label text="s">
                            <font>
                               <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
