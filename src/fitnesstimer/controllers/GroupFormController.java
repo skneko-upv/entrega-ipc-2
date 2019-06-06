@@ -11,13 +11,17 @@ import fitnesstimer.component.ValidatedTextField;
 import fitnesstimer.controllers.base.AbstractFormController;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.util.StringConverter;
 import modelo.Grupo;
+import modelo.SesionTipo;
 
 /**
  * FXML Controller class
@@ -29,8 +33,6 @@ public class GroupFormController extends AbstractFormController<Grupo> {
     public static final String ID_PATTERN = "G%d";
 
     @FXML
-    private TextField codeField;
-    @FXML
     private Label codeErrorLabel;
     @FXML
     private TextArea descriptionField;
@@ -41,6 +43,12 @@ public class GroupFormController extends AbstractFormController<Grupo> {
     
     private ObservableList<Grupo> groups;
     private int editIndex;
+    @FXML
+    private Button cancelBtn;
+    @FXML
+    private Button saveBtn;
+    @FXML
+    private ChoiceBox<SesionTipo> sessionChoiceBox;
 
     /**
      * Initializes the controller class.
@@ -55,6 +63,26 @@ public class GroupFormController extends AbstractFormController<Grupo> {
         this.editIndex = editIndex;
 
         description = new ValidatedTextField(descriptionField, descriptionErrorLabel);
+        
+        sessionChoiceBox.setItems(FXCollections.observableArrayList(
+                db.getGym().getTiposSesion()
+        ));
+        
+        sessionChoiceBox.setConverter(new StringConverter<SesionTipo>() {
+            @Override
+            public SesionTipo fromString(String s) {
+                final String code = s.substring(1, s.indexOf("]"));
+                return db.getGym().getTiposSesion()
+                        .stream().filter(p -> p.getCodigo().equals(code)).findFirst().get();
+            }
+            
+            @Override
+            public String toString(SesionTipo p) {
+                return String.format("[%s] %dx%d %ds", 
+                        p.getCodigo(), p.getNum_circuitos(), 
+                        p.getNum_ejercicios(), p.getT_ejercicio());
+            }
+        });
 
         super.setup(prefill, editMode);
     }
@@ -63,7 +91,7 @@ public class GroupFormController extends AbstractFormController<Grupo> {
     protected void onSaveValidated(ActionEvent e) {
         Grupo group = new Grupo();
         
-        //TODO: group.setDefaultTipoSesion();
+        group.setDefaultTipoSesion(sessionChoiceBox.getValue());
         group.setDescripcion(description.getText());
         
         if (editIndex < 0) {
@@ -85,11 +113,13 @@ public class GroupFormController extends AbstractFormController<Grupo> {
     @Override
     protected void prefill() {
         description.setText(prefill.getDescripcion());
+        sessionChoiceBox.setValue(prefill.getDefaultTipoSesion());
     }
     
     @Override
     protected void setUneditableAll() {
         description.setEditable(false);
+        sessionChoiceBox.setDisable(true);
     }
     
     @Override

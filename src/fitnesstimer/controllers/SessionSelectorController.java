@@ -11,6 +11,7 @@ import fitnesstimer.controllers.base.AbstractController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -98,17 +99,19 @@ public class SessionSelectorController extends AbstractController {
                 restTimeTrack.setText(String.valueOf(selected.getD_circuito()));
             }
         });
-        
-        try {
-            plansView.getSelectionModel().select(group.getDefaultTipoSesion());
-        } catch (Exception e) {
-            System.err.println("Cannot select default plan of selected group: " + e);
-        }
     }
 
     public void setup(TimeDashboardController dashboard, Grupo group) {
         this.dashboard = dashboard;
         this.group = group;
+        
+        try {
+            Platform.runLater(() -> {
+                plansView.getSelectionModel().select(group.getDefaultTipoSesion());
+            });
+        } catch (Exception e) {
+            System.err.println("Cannot select default plan of selected group: " + e);
+        }
     }
 
     @FXML
