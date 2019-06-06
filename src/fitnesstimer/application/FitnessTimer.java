@@ -7,6 +7,7 @@
  */
 package fitnesstimer.application;
 
+import fitnesstimer.controllers.TimeDashboardController;
 import fitnesstimer.i18n.I18n;
 import java.util.Locale;
 import javafx.application.Application;
@@ -21,10 +22,13 @@ public class FitnessTimer extends Application {
     public void start(Stage stage) throws Exception {
         I18n.createInstance(Locale.getDefault());
         
-        Parent root = FXMLLoader.load(getClass().getResource("/fitnesstimer/views/TimeDashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fitnesstimer/views/TimeDashboard.fxml"));
+        Parent root = loader.load();
+        
+        TimeDashboardController controller = loader.<TimeDashboardController>getController();
+        controller.setup(stage);
         
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
         stage.show();
     }

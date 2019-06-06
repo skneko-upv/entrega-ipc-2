@@ -46,6 +46,8 @@ public class GroupSelectorController extends AbstractController {
     private Button nextBtn;
     
     private ObservableList<Grupo> groups;
+    
+    private TimeDashboardController dashboard;
 
     /**
      * Initializes the controller class.
@@ -74,6 +76,10 @@ public class GroupSelectorController extends AbstractController {
                 Bindings.isNull(groupsView.getSelectionModel().selectedItemProperty())
         );
     }    
+    
+    public void setup(TimeDashboardController dashboard) {
+        this.dashboard = dashboard;
+    }
 
     @FXML
     private void onAdd(ActionEvent event) {
@@ -100,7 +106,7 @@ public class GroupSelectorController extends AbstractController {
             Parent root = loader.load();
             
             SessionSelectorController controller = loader.<SessionSelectorController>getController();
-            controller.setup(selected);
+            controller.setup(dashboard, selected);
             
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene next = new Scene(root);

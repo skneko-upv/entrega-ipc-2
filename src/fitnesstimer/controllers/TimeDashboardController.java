@@ -10,15 +10,22 @@ package fitnesstimer.controllers;
 import fitnesstimer.component.Countdown;
 import fitnesstimer.component.Timer;
 import fitnesstimer.controllers.base.AbstractController;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import modelo.Grupo;
 import modelo.SesionTipo;
 
 /**
@@ -51,12 +58,15 @@ public class TimeDashboardController extends AbstractController {
     @FXML
     private Text millis;
 
+    private Stage ownStage;
+
     private Timer timer;
 
     private enum ActivityKind {
         WARM_UP, EXERCISE_RUN, EXERCISE_REST, TRACK_REST, FINISHED
     }
 
+    private Grupo group;
     private SesionTipo plan;
     private int track;
     private int exercise;
@@ -82,17 +92,36 @@ public class TimeDashboardController extends AbstractController {
         minutes.textProperty().bind(Bindings.format("%02d", timer.getMinsBinding()));
         seconds.textProperty().bind(Bindings.format("%02d", timer.getSecsBinding()));
         millis.textProperty().bind(Bindings.format("%03d", timer.getMillisBinding()));
+    }
 
-        // TODO: launch group selector
-        this.plan = db.getGym().getTiposSesion().get(2);
-        System.out.println(String.format(
-                            "[%s] %dx%d %ds",
-                            plan.getCodigo(),
-                            plan.getNum_circuitos(),
-                            plan.getNum_ejercicios(),
-                            plan.getT_ejercicio()
-                    ));
+    public void setup(Stage stage) {
+        this.ownStage = stage;
+        launchSessionSetup();
+    }
 
+    private void launchSessionSetup() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fitnesstimer/views/GroupSelector.fxml"));
+            Parent root = loader.load();
+            
+            GroupSelectorController controller = loader.<GroupSelectorController>getController();
+            controller.setup(this);
+
+            Stage newStage = new Stage();
+            Scene scene = new Scene(root);
+            newStage.titleProperty().bind(i18n.getStringBinding("groupSelector.window.title"));
+            newStage.setScene(scene);
+            newStage.initModality(Modality.WINDOW_MODAL);
+            newStage.initOwner(ownStage);
+            newStage.showAndWait();
+        } catch (IOException e) {
+            System.err.println("Cannot launch session setup: " + e);
+        }
+    }
+    
+    public void setupSession(Grupo group, SesionTipo plan) {
+        this.group = group;
+        this.plan = plan;
         setupSession();
     }
 
@@ -115,7 +144,7 @@ public class TimeDashboardController extends AbstractController {
                     phase = ActivityKind.TRACK_REST;
                     return;
                 }
-                
+
                 phase = ActivityKind.EXERCISE_REST;
                 break;
 
@@ -174,7 +203,7 @@ public class TimeDashboardController extends AbstractController {
         trackNumber.setText(String.valueOf(track));
         exerciseNumber.setText(String.valueOf(exercise));
         // TODO: hide numbers during warmup
-        
+
         int h = duration / 3600;
         int m = (duration % 3600) / 60;
         int s = duration % 60;

@@ -42,6 +42,7 @@ public class SessionSelectorController extends AbstractController {
 
     private Grupo group;
     private ObservableList<SesionTipo> plans;
+    private TimeDashboardController dashboard;
 
     /**
      * Initializes the controller class.
@@ -81,7 +82,8 @@ public class SessionSelectorController extends AbstractController {
         // TODO
     }
 
-    public void setup(Grupo group) {
+    public void setup(TimeDashboardController dashboard, Grupo group) {
+        this.dashboard = dashboard;
         this.group = group;
     }
 
@@ -133,7 +135,7 @@ public class SessionSelectorController extends AbstractController {
         SesionTipo selected = plansView.getSelectionModel().getSelectedItem();
         if (selected == null) return;
         
-        // TODO: set session & group on timer dashboard
+        dashboard.setupSession(group, selected);
         
         close(event);
     }
