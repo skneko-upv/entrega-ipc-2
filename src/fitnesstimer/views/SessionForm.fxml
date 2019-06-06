@@ -77,11 +77,6 @@
                                     <Font name="Microsoft Sans Serif" size="11.0" />
                                  </font>
                               </TextField>
-                              <Label text="s">
-                                 <padding>
-                                    <Insets top="5.0" />
-                                 </padding>
-                              </Label>
                            </children>
                            <padding>
                               <Insets top="10.0" />
@@ -107,11 +102,6 @@
                                     <Font name="Microsoft Sans Serif" size="11.0" />
                                  </font>
                               </TextField>
-                              <Label text="s">
-                                 <padding>
-                                    <Insets top="5.0" />
-                                 </padding>
-                              </Label>
                            </children>
                            <padding>
                               <Insets top="10.0" />
