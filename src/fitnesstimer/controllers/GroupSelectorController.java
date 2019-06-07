@@ -56,6 +56,8 @@ public class GroupSelectorController extends AbstractController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        super.initialize(url, rb);
+        
         groups = FXCollections.observableArrayList(db.getGym().getGrupos());
         groupsView.setCellFactory(view -> new ListCell<Grupo>() {
             @Override

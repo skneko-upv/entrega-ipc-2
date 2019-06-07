@@ -56,7 +56,9 @@ public class GroupFormController extends AbstractFormController<Grupo> {
      * @param rb Not used
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}
+    public void initialize(URL url, ResourceBundle rb) {
+        super.initialize(url, rb);
+    }
     
     public void setup(Grupo prefill, boolean editMode, ObservableList<Grupo> groups, int editIndex) {
         this.groups = groups;

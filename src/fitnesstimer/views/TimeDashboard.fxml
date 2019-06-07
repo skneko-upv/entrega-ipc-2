@@ -35,7 +35,7 @@
               <items>
                   <Menu mnemonicParsing="false" text="Tema">
                      <items>
-                        <RadioMenuItem mnemonicParsing="false" text="Claro">
+                        <RadioMenuItem fx:id="dayStyle" mnemonicParsing="false" text="Claro">
                            <toggleGroup>
                               <ToggleGroup fx:id="style" />
                            </toggleGroup>

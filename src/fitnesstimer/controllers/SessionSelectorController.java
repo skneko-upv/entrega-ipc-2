@@ -22,9 +22,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Grupo;
@@ -36,7 +36,7 @@ import modelo.SesionTipo;
  * @author Dani
  */
 public class SessionSelectorController extends AbstractController {
-    
+
     @FXML
     private Button prevBtn;
     @FXML
@@ -44,22 +44,22 @@ public class SessionSelectorController extends AbstractController {
     @FXML
     private ListView<SesionTipo> plansView;
     @FXML
-    private TextField tracksNumber;
+    private Label tracksNumber;
     @FXML
-    private TextField exerciseNumber;
+    private Label exerciseNumber;
     @FXML
-    private TextField exerciseTime;
+    private Label exerciseTime;
     @FXML
-    private TextField warmUpTime;
+    private Label warmUpTime;
     @FXML
-    private TextField restTimeExercise;
+    private Label restTimeExercise;
     @FXML
-    private TextField restTimeTrack;
+    private Label restTimeTrack;
 
     private Grupo group;
     private ObservableList<SesionTipo> plans;
     private TimeDashboardController dashboard;
-    
+
     /**
      * Initializes the controller class.
      * @param url Not used
@@ -67,6 +67,8 @@ public class SessionSelectorController extends AbstractController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        super.initialize(url, rb);
+        
         plans = FXCollections.observableArrayList(db.getGym().getTiposSesion());
         plansView.setItems(plans);
         plansView.setCellFactory(view -> new ListCell<SesionTipo>() {
@@ -88,7 +90,7 @@ public class SessionSelectorController extends AbstractController {
         nextBtn.disableProperty().bind(
                 Bindings.isNull(plansView.getSelectionModel().selectedItemProperty())
         );
-        
+
         plansView.getSelectionModel().selectedItemProperty().addListener((_val, _oldVal, selected) -> {
             if (selected != null) {
                 tracksNumber.setText(String.valueOf(selected.getNum_circuitos()));
@@ -104,7 +106,7 @@ public class SessionSelectorController extends AbstractController {
     public void setup(TimeDashboardController dashboard, Grupo group) {
         this.dashboard = dashboard;
         this.group = group;
-        
+
         try {
             Platform.runLater(() -> {
                 plansView.getSelectionModel().select(group.getDefaultTipoSesion());
@@ -154,7 +156,7 @@ public class SessionSelectorController extends AbstractController {
         } catch (IOException e) {
             System.err.println("Cannot launch form: " + e);
         }
-        
+
         plansView.getSelectionModel().select(plans.size() - 1);
     }
 
@@ -163,10 +165,10 @@ public class SessionSelectorController extends AbstractController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fitnesstimer/views/GroupSelector.fxml"));
             Parent root = loader.load();
-            
+
             GroupSelectorController controller = loader.<GroupSelectorController>getController();
             controller.setup(dashboard);
-            
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene next = new Scene(root);
             stage.titleProperty().bind(i18n.getStringBinding("groupSelector.window.title"));
@@ -180,9 +182,9 @@ public class SessionSelectorController extends AbstractController {
     private void onNext(ActionEvent event) {
         SesionTipo selected = plansView.getSelectionModel().getSelectedItem();
         if (selected == null) return;
-        
+
         dashboard.setupSession(group, selected);
-        
+
         close(event);
     }
 

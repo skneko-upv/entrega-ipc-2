@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -263,15 +265,21 @@
         <menus>
           <Menu mnemonicParsing="false" text="Menú">
             <items>
-                  <MenuItem disable="true" mnemonicParsing="false" text="Reiniciar sesión" />
-                  <MenuItem disable="true" mnemonicParsing="false" text="Terminar sesión" />
               <MenuItem mnemonicParsing="false" onAction="#onQuit" text="Salir" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Configuración">
             <items>
-              <MenuItem fx:id="DayStyle" mnemonicParsing="false" onAction="#onStyle" text="Diurno" />
-                  <MenuItem fx:id="NigthStyle" mnemonicParsing="false" onAction="#onStyle" text="Nocturno" />
+                  <Menu mnemonicParsing="false" text="Tema">
+                    <items>
+                        <RadioMenuItem fx:id="dayStyle" mnemonicParsing="false" text="Claro">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="style" />
+                           </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem fx:id="nightStyle" mnemonicParsing="false" text="Oscuro" toggleGroup="$style" />
+                    </items>
+                  </Menu>
             </items>
           </Menu>
         </menus>

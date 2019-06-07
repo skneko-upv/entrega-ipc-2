@@ -67,7 +67,9 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
      * @param rb Not used
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}
+    public void initialize(URL url, ResourceBundle rb) {
+        super.initialize(url, rb);
+    }
 
     public void setup(SesionTipo prefill, boolean editMode, ObservableList<SesionTipo> plans) {
         this.plans = plans;

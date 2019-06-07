@@ -24,11 +24,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Slider;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -47,8 +44,6 @@ import modelo.SesionTipo;
 public class TimeDashboardController extends AbstractController {
 
     @FXML
-    private Button nextExerciseBtn;
-    @FXML
     private Label statusLabel;
     @FXML
     private Text trackNumber;
@@ -62,12 +57,6 @@ public class TimeDashboardController extends AbstractController {
     private Text seconds;
     @FXML
     private Text millis;
-    @FXML
-    private RadioMenuItem DayStyle;
-    @FXML
-    private RadioMenuItem NigthStyle;
-    @FXML
-    private ToggleGroup style;
     @FXML
     private Slider volumeSlider;
     @FXML
@@ -101,6 +90,8 @@ public class TimeDashboardController extends AbstractController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        super.initialize(url, rb);
+        
         timer = new Countdown(0, 0, 15, 0);
         timer.finishedProperty().addListener((_val, wasZero, isNowZero) -> {
             if (!sessionFinished && !wasZero && isNowZero) {    // timer just reached zero
@@ -117,19 +108,6 @@ public class TimeDashboardController extends AbstractController {
         volume = new SimpleDoubleProperty(volumeSlider.getValue());
         volume.bind(volumeSlider.valueProperty());
         volumeNumber.textProperty().bind(Bindings.format("%3.0f", volume));
-        
-        style.selectedToggleProperty().addListener((_val, _oldVal, selected) -> {
-            if (selected != null) {
-                String stylesheet;
-                if (selected.equals(DayStyle)) {
-                    stylesheet = "fitnesstimer/resources/css/style.css";
-                } else {
-                    stylesheet = "fitnesstimer/resources/css/styleN.css";          
-                }
-                ownStage.getScene().getStylesheets().removeAll(stylesheet);
-                ownStage.getScene().getStylesheets().add(stylesheet);
-            }
-        });
     }
 
     public void setup(Stage stage) {

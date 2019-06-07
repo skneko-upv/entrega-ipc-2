@@ -50,6 +50,8 @@ public class GroupHistoryController extends AbstractController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        super.initialize(url, rb);
+        
         sessionNum = DEFAULT_SESSION_NUM;
     }
 
