@@ -17,13 +17,20 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -43,8 +50,6 @@ public class TimeDashboardController extends AbstractController {
     @FXML
     private Button resumeBtn;
     @FXML
-    private Button pauseBtn;
-    @FXML
     private Button nextExerciseBtn;
     @FXML
     private Label statusLabel;
@@ -62,10 +67,44 @@ public class TimeDashboardController extends AbstractController {
     private Text millis;
 
     private Stage ownStage;
+    private Scene ownScene;
 
     private Timer timer;
     private LocalDateTime startTime;
     private long startEpoch;
+    @FXML
+    private Button playAndPauseBtn;
+    @FXML
+    private CheckMenuItem DayStyle;
+    @FXML
+    private CheckMenuItem NigthStyle;
+    private Stage window;
+    @FXML
+    private Slider volumeSlider;
+    @FXML
+    private ImageView muteImage;
+    private double volumeR;
+    @FXML
+    private Text volumeNumber;
+
+    @FXML
+    private void onFinish(ActionEvent event) {
+        timer.pause();
+        this.launchSessionSetup();
+        
+    }
+
+    @FXML
+    private void onMute(MouseEvent event) {
+         if(volumeSlider.getValue() !=0){
+            volumeR = volumeSlider.getValue();
+            volumeSlider.setValue(0.0);
+            muteImage.setImage(new Image("fitnesstimer/resources/images/mute-png-18.png"));
+        }else{
+            volumeSlider.setValue(volumeR);
+            muteImage.setImage(new Image("fitnesstimer/resources/images/1024px-Speaker_Icon.png"));
+        }
+    }
 
     private enum ActivityKind {
         WARM_UP, EXERCISE_RUN, EXERCISE_REST, TRACK_REST, FINISHED
@@ -85,6 +124,8 @@ public class TimeDashboardController extends AbstractController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        volumeR = volumeSlider.getValue();
+        ownScene = null;
         timer = new Countdown(0, 0, 15, 0);
         timer.finishedProperty().addListener((_val, wasZero, isNowZero) -> {
             if (!sessionFinished && !wasZero && isNowZero) {    // timer just reached zero
@@ -97,6 +138,14 @@ public class TimeDashboardController extends AbstractController {
         minutes.textProperty().bind(Bindings.format("%02d", timer.getMinsBinding()));
         seconds.textProperty().bind(Bindings.format("%02d", timer.getSecsBinding()));
         millis.textProperty().bind(Bindings.format("%03d", timer.getMillisBinding()));
+        volumeSlider.valueProperty().addListener(new ChangeListener(){
+            @Override
+            public void changed(ObservableValue arg0, Object arg1, Object arg2) {
+                volumeNumber.textProperty().setValue(
+                        String.valueOf((int) volumeSlider.getValue()));
+
+            }
+        });
     }
 
     public void setup(Stage stage) {
@@ -249,20 +298,19 @@ public class TimeDashboardController extends AbstractController {
         }
     }
 
-    @FXML
     private void onPause(ActionEvent event) {
         if (!sessionFinished) {
             timer.pause();
         }
     }
 
-    @FXML
     private void onResume(ActionEvent event) {
         if (!sessionFinished) {
             timer.resume();
         }
     }
 
+    @FXML
     private void onTogglePause(ActionEvent event) {
         if (timer.isPaused()) {
             onResume(event);
@@ -279,14 +327,34 @@ public class TimeDashboardController extends AbstractController {
         }
     }
 
+    @FXML
     private void onResetSession(ActionEvent event) {
         if (!sessionFinished) timer.pause();
         setupSession();
     }
 
+    @FXML
     private void onQuit(ActionEvent event) {
         Platform.exit();
         System.exit(0);
     }
-
+    @FXML
+    private void onStyle(ActionEvent event){
+        if(ownScene == null){
+            ownScene = nextExerciseBtn.getScene();
+        }
+        String root="";
+        if(event.getSource().equals(DayStyle)){
+            DayStyle.setSelected(true);
+            NigthStyle.setSelected(false);
+            root = "fitnesstimer/resources/css/style.css";
+        }else{
+            DayStyle.setSelected(false);
+            NigthStyle.setSelected(true);
+            root = "fitnesstimer/resources/css/styleN.css";          
+        }
+        ownScene.getStylesheets().removeAll(root);
+        ownScene.getStylesheets().add(root);
+        
+    }
 }
