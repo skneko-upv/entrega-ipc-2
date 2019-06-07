@@ -4,7 +4,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -80,11 +82,11 @@
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="tracksNumber" alignment="BASELINE_RIGHT" disable="true" editable="false" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="12.0" />
-                           </font>
-                        </TextField>
+                        <Label fx:id="tracksNumber">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
                      </children>
                      <padding>
                         <Insets top="10.0" />
@@ -100,11 +102,11 @@
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <TextField fx:id="exerciseNumber" alignment="BASELINE_RIGHT" disable="true" editable="false" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="12.0" />
-                           </font>
-                        </TextField>
+                        <Label fx:id="exerciseNumber">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
                      </children>
                      <padding>
                         <Insets top="10.0" />
@@ -120,11 +122,11 @@
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <TextField fx:id="exerciseTime" alignment="BASELINE_RIGHT" disable="true" editable="false" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="12.0" />
-                           </font>
-                        </TextField>
+                        <Label fx:id="exerciseTime">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
                         <Label text="s">
                            <font>
                               <Font name="Microsoft Sans Serif" size="12.0" />
@@ -132,6 +134,9 @@
                            <padding>
                               <Insets top="3.0" />
                            </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </Label>
                      </children>
                      <padding>
@@ -148,11 +153,11 @@
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <TextField fx:id="warmUpTime" alignment="BASELINE_RIGHT" disable="true" editable="false" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="12.0" />
-                           </font>
-                        </TextField>
+                        <Label fx:id="warmUpTime">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
                         <Label text="s">
                            <font>
                               <Font name="Microsoft Sans Serif" size="12.0" />
@@ -160,6 +165,9 @@
                            <padding>
                               <Insets top="3.0" />
                            </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </Label>
                      </children>
                      <padding>
@@ -176,11 +184,11 @@
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
-                        <TextField fx:id="restTimeExercise" alignment="BASELINE_RIGHT" disable="true" editable="false" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="12.0" />
-                           </font>
-                        </TextField>
+                        <Label fx:id="restTimeExercise">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
                         <Label text="s">
                            <font>
                               <Font name="Microsoft Sans Serif" size="12.0" />
@@ -188,6 +196,9 @@
                            <padding>
                               <Insets top="3.0" />
                            </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </Label>
                      </children>
                      <padding>
@@ -204,11 +215,11 @@
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
-                        <TextField fx:id="restTimeTrack" alignment="BASELINE_RIGHT" disable="true" editable="false" maxWidth="-Infinity" prefWidth="110.0" styleClass="text-id-sub">
-                           <font>
-                              <Font name="Microsoft Sans Serif" size="12.0" />
-                           </font>
-                        </TextField>
+                        <Label fx:id="restTimeTrack">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
                         <Label text="s">
                            <font>
                               <Font name="Microsoft Sans Serif" size="12.0" />
@@ -216,6 +227,9 @@
                            <padding>
                               <Insets top="3.0" />
                            </padding>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </Label>
                      </children>
                      <padding>
@@ -244,4 +258,23 @@
          </padding>
       </HBox>
    </bottom>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Menú">
+            <items>
+                  <MenuItem disable="true" mnemonicParsing="false" text="Reiniciar sesión" />
+                  <MenuItem disable="true" mnemonicParsing="false" text="Terminar sesión" />
+              <MenuItem mnemonicParsing="false" onAction="#onQuit" text="Salir" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Configuración">
+            <items>
+              <MenuItem fx:id="DayStyle" mnemonicParsing="false" onAction="#onStyle" text="Diurno" />
+                  <MenuItem fx:id="NigthStyle" mnemonicParsing="false" onAction="#onStyle" text="Nocturno" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
 </BorderPane>
