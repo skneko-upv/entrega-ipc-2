@@ -164,6 +164,9 @@ public class SessionSelectorController extends AbstractController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fitnesstimer/views/GroupSelector.fxml"));
             Parent root = loader.load();
             
+            GroupSelectorController controller = loader.<GroupSelectorController>getController();
+            controller.setup(dashboard);
+            
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene next = new Scene(root);
             stage.titleProperty().bind(i18n.getStringBinding("groupSelector.window.title"));
