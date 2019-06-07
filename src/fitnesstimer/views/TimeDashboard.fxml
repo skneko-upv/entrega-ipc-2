@@ -40,7 +40,7 @@
                               <ToggleGroup fx:id="style" />
                            </toggleGroup>
                         </RadioMenuItem>
-                        <RadioMenuItem mnemonicParsing="false" text="Oscuro" toggleGroup="$style" />
+                        <RadioMenuItem fx:id="nightStyle" mnemonicParsing="false" text="Oscuro" toggleGroup="$style" />
                      </items>
                   </Menu>
               </items>
