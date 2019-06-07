@@ -26,20 +26,20 @@ import modelo.Sesion;
  * @author Dani
  */
 public class GroupHistoryController extends AbstractController {
-    
+
     private static final int DEFAULT_SESSION_NUM = 10;
 
     @FXML
-    private LineChart<String, Number> chart;
+    private LineChart<String,Number> chart;
     @FXML
     private NumberAxis timeAxis;
     @FXML
     private CategoryAxis sessionAxis;
     @FXML
     private TextField sessionNumPicker;
-    
-    private XYChart.Series timePerSessionSeries;
-    
+
+    private XYChart.Series<String,Number> timePerSessionSeries;
+
     private Grupo group;
     private int sessionNum;
 
@@ -51,38 +51,38 @@ public class GroupHistoryController extends AbstractController {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sessionNum = DEFAULT_SESSION_NUM;
-    }    
-    
+    }
+
     public void setup(Grupo group) {
         sessionNumPicker.setText(String.valueOf(sessionNum));
-        
+
         this.group = group;
-        
+
         chart.titleProperty().bind(i18n.getStringBinding("history.chart.title", group.getCodigo()));
-        
-        timePerSessionSeries = new XYChart.Series();
+
+        timePerSessionSeries = new XYChart.Series<>();
         timePerSessionSeries.nameProperty().bind(i18n.getStringBinding("history.timeSeries.name"));
-        
+
         chart.getData().add(timePerSessionSeries);
-        
+
         sessionNumPicker.textProperty().addListener((_val, _oldVal, newVal) -> {
             try {
                 sessionNum = Integer.parseInt(newVal);
                 drawChart();
             } catch (NumberFormatException e) {}
         });
-        
+
         drawChart();
     }
-    
+
     private void drawChart() {
         timePerSessionSeries.getData().clear();
         group.getSesiones().sort((Sesion a, Sesion b) -> -(a.getFecha().compareTo(b.getFecha())));
         for (int i = 0; i < sessionNum && i < group.getSesiones().size(); i++) {
             Sesion s = group.getSesiones().get(i);
             timePerSessionSeries.getData().add(
-                    new XYChart.Data(
-                            s.getFecha().toString(), 
+                    new XYChart.Data<>(
+                            s.getFecha().toString(),
                             (double) s.getDuracion().getSeconds() / 60
                     )
             );

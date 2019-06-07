@@ -21,6 +21,7 @@ public class FitnessTimer extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         I18n.createInstance(Locale.getDefault());
+        Application.setUserAgentStylesheet("fitnesstimer/resources/css/style.css");
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fitnesstimer/views/TimeDashboard.fxml"));
         Parent root = loader.load();
