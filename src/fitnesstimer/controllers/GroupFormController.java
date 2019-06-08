@@ -99,9 +99,11 @@ public class GroupFormController extends AbstractFormController<Grupo> {
         if (editIndex < 0) {
             group.setCodigo(String.format(ID_PATTERN, groups.size() + 1));
             groups.add(group);
+            db.getGym().getGrupos().add(group);
         } else {
             group.setCodigo(groups.get(editIndex).getCodigo());
             groups.set(editIndex, group);
+            db.getGym().getGrupos().set(editIndex, group);
         }
         
         db.salvar();

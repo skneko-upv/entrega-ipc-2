@@ -117,6 +117,7 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
         plan.setD_circuito(trackRestTime.getValue());
 
         plans.add(plan);
+        db.getGym().getTiposSesion().add(plan);
         
         db.salvar();
     }
