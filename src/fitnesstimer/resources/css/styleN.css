@@ -52,6 +52,21 @@
 .text-id{
     -fx-fill: yellow;
 }
+.chart-series-line {    
+    -fx-stroke-width: 1.5px;
+}
+.default-color0.chart-series-line { 
+    -fx-stroke: blue; 
+} 
+
+.default-color1.chart-series-line { 
+    -fx-stroke: green; 
+} 
+
+.default-color2.chart-series-line { 
+    -fx-stroke: red;
+} 
+
 /*******************************************************************************
  *                                                                             *
  * Button and ToggleButton                                                     *
