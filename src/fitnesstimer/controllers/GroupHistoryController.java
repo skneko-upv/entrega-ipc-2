@@ -54,17 +54,16 @@ public class GroupHistoryController extends AbstractController {
         sessionNumPicker.setText(String.valueOf(sessionNum));
 
         this.group = group;
-        
+        chart.setCreateSymbols(false);
         chart.titleProperty().bind(i18n.getStringBinding("history.chart.title", group.getCodigo()));
         realPerSessionSeries = new XYChart.Series<>();
-        realPerSessionSeries.nameProperty().bind(i18n.getStringBinding("history.timeSeries.name"));
+        realPerSessionSeries.setName("Duración real de la sesión");
         
         restPerSessionSeries = new XYChart.Series<>();
         restPerSessionSeries.setName("Descanso por sesión");
         
         timePerSessionSeries = new XYChart.Series<>();
-        timePerSessionSeries.setName("Duración de la sesión");
-        
+        timePerSessionSeries.setName("Duración teórica de la sesión");
         chart.getData().addAll(realPerSessionSeries,restPerSessionSeries,timePerSessionSeries);
         sessionNumPicker.textProperty().addListener((_val, _oldVal, newVal) -> {
             try {
