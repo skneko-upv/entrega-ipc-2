@@ -24,7 +24,7 @@ import modelo.SesionTipo;
  * @author Dani
  */
 public class SessionFormController extends AbstractFormController<SesionTipo> {
-    
+
     public static final String ID_PATTERN = "W%d";
 
     @FXML
@@ -58,7 +58,7 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
     private ValidatedIntField warmupTime;
     private ValidatedIntField exerciseRestTime;
     private ValidatedIntField trackRestTime;
-    
+
     private ObservableList<SesionTipo> plans;
 
     /**
@@ -73,7 +73,7 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
 
     public void setup(SesionTipo prefill, boolean editMode, ObservableList<SesionTipo> plans) {
         this.plans = plans;
-        
+
         tracks = new ValidatedIntField(tracksField, tracksErrorLabel);
         exercises = new ValidatedIntField(exercisesField, exercisesErrorLabel);
         exerciseTime = new ValidatedIntField(exerciseTimeField, exerciseTimeErrorLabel);
@@ -118,10 +118,10 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
 
         plans.add(plan);
         db.getGym().getTiposSesion().add(plan);
-        
+
         db.salvar();
     }
-    
+
     @Override
     public void setUneditableAll() {
         tracks.setEditable(false);
@@ -131,7 +131,7 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
         exerciseRestTime.setEditable(false);
         trackRestTime.setEditable(false);
     }
-    
+
     @Override
     public void setClearAll() {
         tracks.setClear();
@@ -143,19 +143,11 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
     }
 
     class ValidatedIntField extends ValidatedTextField {
-        public boolean isNumeric(String s) {
-            try {
-                Integer.parseInt(s);
-                return true;
-            } catch (NumberFormatException e) {
-                return false;
-            }
-        }
-        
-        public ValidatedIntField(TextField field, Label errorLabel) {
+
+        ValidatedIntField(TextField field, Label errorLabel) {
             super(field, errorLabel);
-            addValidator(value -> {
-                if (value.equals("")) {
+            addValidator((value) -> {
+                if (value.isEmpty()) {
                     return i18n.getResources().getString("generic.form.error.empty");
                 } else {
                     return null;
@@ -168,10 +160,20 @@ public class SessionFormController extends AbstractFormController<SesionTipo> {
                 if (Integer.parseInt(value) < 0) {
                     return i18n.getResources().getString("generic.form.error.notPositive");
                 }
-                
+
                 return null;
             });
         }
+
+        public boolean isNumeric(String s) {
+            try {
+                Integer.parseInt(s);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
+        }
+
 
         public int getValue() {
             return Integer.parseInt(getText());

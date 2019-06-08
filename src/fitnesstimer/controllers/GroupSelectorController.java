@@ -96,7 +96,9 @@ public class GroupSelectorController extends AbstractController {
     @FXML
     private void onShowHistory(ActionEvent event) {
         Grupo selected = groupsView.getSelectionModel().getSelectedItem();
-        if (selected == null) return;
+        if (selected == null) {
+            return;
+        }
         
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fitnesstimer/views/GroupHistory.fxml"));
@@ -121,7 +123,9 @@ public class GroupSelectorController extends AbstractController {
     @FXML
     private void onNext(ActionEvent event) {
         Grupo selected = groupsView.getSelectionModel().getSelectedItem();
-        if (selected == null) return;
+        if (selected == null) {
+            return;
+        }
         
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fitnesstimer/views/SessionSelector.fxml"));
@@ -144,7 +148,9 @@ public class GroupSelectorController extends AbstractController {
         int index = -1;
         if (editing) {
             prefill = groupsView.getSelectionModel().getSelectedItem();
-            if (prefill == null) return;
+            if (prefill == null) {
+                return;
+            }
             index = groupsView.getSelectionModel().getSelectedIndex();
         }
         

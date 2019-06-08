@@ -73,7 +73,7 @@ public class GroupFormController extends AbstractFormController<Grupo> {
         sessionChoiceBox.setConverter(new StringConverter<SesionTipo>() {
             @Override
             public SesionTipo fromString(String s) {
-                final String code = s.substring(1, s.indexOf("]"));
+                final String code = s.substring(1, s.indexOf(']'));
                 return db.getGym().getTiposSesion()
                         .stream().filter(p -> p.getCodigo().equals(code)).findFirst().get();
             }

@@ -159,10 +159,18 @@ public class Countdown implements Timer {
     }
     
     private void tick() {
-        if (decrementOneOrCycle(millis, 1000)) return;
-        if (decrementOneOrCycle(secs, 60)) return;
-        if (decrementOneOrCycle(mins, 60)) return;
-        if (decrementOneOrCycle(hours, 0)) return;
+        if (decrementOneOrCycle(millis, 1000)) {
+            return;
+        }
+        if (decrementOneOrCycle(secs, 60)) {
+            return;
+        }
+        if (decrementOneOrCycle(mins, 60)) {
+            return;
+        }
+        if (decrementOneOrCycle(hours, 0)) {
+            return;
+        }
         finish();
     }
     

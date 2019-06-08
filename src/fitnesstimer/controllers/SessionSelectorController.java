@@ -181,7 +181,9 @@ public class SessionSelectorController extends AbstractController {
     @FXML
     private void onNext(ActionEvent event) {
         SesionTipo selected = plansView.getSelectionModel().getSelectedItem();
-        if (selected == null) return;
+        if (selected == null) {
+            return;
+        }
 
         dashboard.setupSession(group, selected);
 

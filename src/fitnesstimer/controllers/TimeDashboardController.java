@@ -22,7 +22,6 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -32,6 +31,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
@@ -80,9 +80,6 @@ public class TimeDashboardController extends AbstractController {
     
     private DoubleProperty volume;
 
-    private enum ActivityKind {
-        WARM_UP, EXERCISE_RUN, EXERCISE_REST, TRACK_REST, FINISHED
-    }
 
     private Grupo group;
     private SesionTipo plan;
@@ -112,7 +109,7 @@ public class TimeDashboardController extends AbstractController {
             if (!timer.isPaused() && oldVal.equals(5) && !newVal.equals(5)) { // just passed 5 secs
                 audio.playCountdown5();
                 timerFlow.getChildren().forEach((child) -> {
-                    ((Text)child).setFill(Color.RED);
+                    ((Shape)child).setFill(Color.RED);
                 });
             }
         });
@@ -154,7 +151,6 @@ public class TimeDashboardController extends AbstractController {
             newStage.initOwner(ownStage);
             newStage.showAndWait();
         } catch (IOException e) {
-            System.err.println("Cannot launch session setup: " + e);
         }
         
         if (plan == null) { System.exit(0); }
@@ -243,7 +239,7 @@ public class TimeDashboardController extends AbstractController {
             default:
                 timerBox.setStyle("-fx-border-color: green; -fx-border-width: 4px;");
                 timerFlow.getChildren().forEach((child) -> {
-                    ((Text)child).setFill(Color.BLACK);
+                    ((Shape)child).setFill(Color.BLACK);
                 });
                 
                 i18n.bind(statusLabel, "phase.finished");
@@ -275,7 +271,7 @@ public class TimeDashboardController extends AbstractController {
         timer.setDuration(h, m, s, 0);
         
         timerFlow.getChildren().forEach((child) -> {
-            ((Text)child).setFill(Color.BLACK);
+            ((Shape)child).setFill(Color.BLACK);
         });
         
         timer.reset();
@@ -294,7 +290,9 @@ public class TimeDashboardController extends AbstractController {
     
     @FXML
     private void onFinish(ActionEvent event) {
-        if (!sessionFinished) timer.pause();
+        if (!sessionFinished) {
+            timer.pause();
+        }
         this.launchSessionSetup();
     }
 
@@ -356,7 +354,9 @@ public class TimeDashboardController extends AbstractController {
     @FXML
     private void onResetSession(ActionEvent event) {
         audio.stop();
-        if (!sessionFinished) timer.pause();
+        if (!sessionFinished) {
+            timer.pause();
+        }
         setupSession();
     }
 
@@ -364,6 +364,9 @@ public class TimeDashboardController extends AbstractController {
     private void onQuit(ActionEvent event) {
         Platform.exit();
         System.exit(0);
+    }
+    private enum ActivityKind {
+        WARM_UP, EXERCISE_RUN, EXERCISE_REST, TRACK_REST, FINISHED
     }
     
 }

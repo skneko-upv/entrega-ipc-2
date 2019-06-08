@@ -27,9 +27,6 @@ public class ValidatedTextField {
     private boolean isError;
     private List<TextFieldValidator> validators;
 
-    @FunctionalInterface
-    public interface TextFieldValidator extends Function<String, String> {
-    }
 
     public ValidatedTextField(TextInputControl field, Labeled errorLabel) {
         this(field, errorLabel, 0);
@@ -80,15 +77,15 @@ public class ValidatedTextField {
         return isError;
     }
 
-    public final void addValidator(TextFieldValidator validator) {
+    public void addValidator(TextFieldValidator validator) {
         this.validators.add(validator);
     }
 
-    public final boolean validate() {
+    public boolean validate() {
         return validate(true);
     }
 
-    public final boolean validate(boolean setErrorOnFail) {
+    public boolean validate(boolean setErrorOnFail) {
         String error = null;
         for (TextFieldValidator validator : validators) {
             error = validator.apply(getText());
@@ -119,4 +116,7 @@ public class ValidatedTextField {
         field.getStyleClass().remove(CSS_ERROR_CLASS);
         errorLabel.setVisible(false);
     }
+
+    @FunctionalInterface
+    public interface TextFieldValidator extends Function<String, String> {}
 }

@@ -17,13 +17,20 @@ import javafx.scene.media.AudioClip;
  * @author Dani
  */
 public class AudioPlayer {
-    
+
     private static final double DEFAULT_VOLUME = 0.5;
-    
+
     private static AudioPlayer instance;
-    
+
+    public static AudioPlayer getInstance() {
+        if (instance == null) {
+            instance = new AudioPlayer(DEFAULT_VOLUME);
+        }
+        return instance;
+    }
+
     private final DoubleProperty volume;
-    
+
     AudioClip begin = new AudioClip(
             getClass().getResource("/fitnesstimer/resources/sounds/begin.wav").toString()
     );
@@ -39,64 +46,58 @@ public class AudioPlayer {
     AudioClip end = new AudioClip(
             getClass().getResource("/fitnesstimer/resources/sounds/final.wav").toString()
     );
-    
+
     private AudioClip current;
-    
-    public static AudioPlayer getInstance() {
-        if (instance == null) {
-            instance = new AudioPlayer(DEFAULT_VOLUME);
-        }
-        return instance;
-    }
-    
+
+
     private AudioPlayer(double volume) {
         this.volume = new SimpleDoubleProperty(volume);
     }
-    
+
     public void setVolume(double volume) {
         assert volume >= 0.0 && volume <= 1.0;
         this.volume.set(volume);
     }
-    
+
     public DoubleProperty volumeProperty() {
         return volume;
     }
-    
+
     public double getVolume() {
         return volumeProperty().get();
     }
-    
+
     public void play(AudioClip clip) {
         stop();
         current = clip;
         clip.volumeProperty().bind(volume);
         clip.play();
     }
-    
+
     public void stop() {
         if (current != null) {
             current.stop();
         }
     }
-    
+
     public void playBegin() {
         play(begin);
     }
-    
+
     public void playCountdown5() {
         play(countdown5);
     }
-    
+
     public void playResume() {
         play(resume);
     }
-    
+
     public void playPause() {
         play(pause);
     }
-    
+
     public void playFinal() {
         play(end);
     }
-    
+
 }

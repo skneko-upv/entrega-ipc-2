@@ -25,11 +25,11 @@ public class ObservableResourceFactory {
         return resources;
     }
     
-    public final ResourceBundle getResources() {
+    public ResourceBundle getResources() {
         return resourcesProperty().get();
     }
     
-    public final void setResources(ResourceBundle resources) {
+    public void setResources(ResourceBundle resources) {
         resourcesProperty().set(resources);
     }
     
