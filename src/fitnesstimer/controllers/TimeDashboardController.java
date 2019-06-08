@@ -114,6 +114,12 @@ public class TimeDashboardController extends AbstractController {
         volume.bind(volumeSlider.valueProperty());
         volumeNumber.textProperty().bind(Bindings.format("%3.0f", volume));
         audio.volumeProperty().bind(volume.divide(100));
+        
+        muteImage.imageProperty().bind(
+                Bindings.when(volumeSlider.valueProperty().isEqualTo(0.0, 0.5))
+                    .then(new Image("fitnesstimer/resources/images/mute.png"))
+                    .otherwise(new Image("fitnesstimer/resources/images/speaker.png"))
+        );
     }
 
     public void setup(Stage stage) {
@@ -269,14 +275,12 @@ public class TimeDashboardController extends AbstractController {
 
     @FXML
     private void onMute(MouseEvent event) {
-        if(volumeSlider.getValue() != 0){
-            volume.set(volumeSlider.getValue());
-            volumeSlider.setValue(0.0);
-            muteImage.setImage(new Image("fitnesstimer/resources/images/mute.png"));
+        if (volumeSlider.valueProperty().isEqualTo(0.0, 0.5).get()) {
+            volumeSlider.setValue(50.0);
         } else {
-            volumeSlider.setValue(volume.get());
-            muteImage.setImage(new Image("fitnesstimer/resources/images/speaker.png"));
+            volumeSlider.setValue(0.0);
         }
+        
     }
 
     @FXML
