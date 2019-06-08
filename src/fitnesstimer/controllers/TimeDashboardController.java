@@ -81,6 +81,7 @@ public class TimeDashboardController extends AbstractController {
     private int track;
     private int exercise;
     private ActivityKind phase;
+    private boolean firstPlay;
     private boolean sessionFinished;
 
     /**
@@ -97,7 +98,11 @@ public class TimeDashboardController extends AbstractController {
             if (!sessionFinished && !wasZero && isNowZero) {    // timer just reached zero
                 nextActivity();
                 timer.resume();
-                // TODO: warnings
+            }
+        });
+        timer.secsProperty().addListener((_val, oldVal, newVal) -> {
+            if (!timer.isPaused() && oldVal.equals(5) && !newVal.equals(5)) { // just passed 5 secs
+                audio.playCountdown5();
             }
         });
 
@@ -108,6 +113,7 @@ public class TimeDashboardController extends AbstractController {
         volume = new SimpleDoubleProperty(volumeSlider.getValue());
         volume.bind(volumeSlider.valueProperty());
         volumeNumber.textProperty().bind(Bindings.format("%3.0f", volume));
+        audio.volumeProperty().bind(volume.divide(100));
     }
 
     public void setup(Stage stage) {
@@ -218,6 +224,7 @@ public class TimeDashboardController extends AbstractController {
                 if (!sessionFinished) {
                     sessionFinished = true;
                     timer.finish();
+                    audio.playFinal();
                     
                     int i = db.getGym().getGrupos().indexOf(group);
                     if (i >= 0 && i < db.getGym().getGrupos().size()) {
@@ -250,6 +257,7 @@ public class TimeDashboardController extends AbstractController {
         track = 0;
         exercise = 0;
         phase = ActivityKind.WARM_UP;
+        firstPlay = true;
         setupScene();
     }
     
@@ -280,12 +288,19 @@ public class TimeDashboardController extends AbstractController {
 
     private void onPause(ActionEvent event) {
         if (!sessionFinished) {
+            audio.playPause();
             timer.pause();
         }
     }
 
     private void onResume(ActionEvent event) {
         if (!sessionFinished) {
+            if (firstPlay) {
+                audio.playBegin();
+                firstPlay = false;
+            } else {
+                audio.playResume();
+            }
             timer.resume();
         }
     }

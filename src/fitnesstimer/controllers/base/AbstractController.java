@@ -8,6 +8,7 @@
 package fitnesstimer.controllers.base;
 
 import accesoBD.AccesoBD;
+import fitnesstimer.audio.AudioPlayer;
 import fitnesstimer.i18n.I18n;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,6 +43,7 @@ public abstract class AbstractController implements Initializable {
 
     protected final AccesoBD db = AccesoBD.getInstance();
     protected final I18n i18n = I18n.getInstance();
+    protected final AudioPlayer audio = AudioPlayer.getInstance();
 
     /**
      * Initializes the controller class.
