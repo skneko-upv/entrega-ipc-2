@@ -22,6 +22,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -29,7 +30,10 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Grupo;
@@ -63,6 +67,10 @@ public class TimeDashboardController extends AbstractController {
     private ImageView muteImage;
     @FXML
     private Text volumeNumber;
+    @FXML
+    private HBox timerBox;
+    @FXML
+    private TextFlow timerFlow;
 
     private Stage ownStage;
 
@@ -103,6 +111,9 @@ public class TimeDashboardController extends AbstractController {
         timer.secsProperty().addListener((_val, oldVal, newVal) -> {
             if (!timer.isPaused() && oldVal.equals(5) && !newVal.equals(5)) { // just passed 5 secs
                 audio.playCountdown5();
+                timerFlow.getChildren().forEach((child) -> {
+                    ((Text)child).setFill(Color.RED);
+                });
             }
         });
 
@@ -211,21 +222,30 @@ public class TimeDashboardController extends AbstractController {
             case WARM_UP:
                 duration = plan.getT_calentamiento();
                 descKey = "phase.warmup";
+                timerBox.setStyle("-fx-border-color: gold; -fx-border-width: 4px;");
                 break;
             case EXERCISE_RUN:
                 duration = plan.getT_ejercicio();
                 descKey = "phase.exerciseRun";
+                timerBox.setStyle("-fx-border-color: orange; -fx-border-width: 4px;");
                 break;
             case EXERCISE_REST:
                 duration = plan.getD_ejercicio();
                 descKey = "phase.exerciseRest";
+                timerBox.setStyle("-fx-border-color: cyan; -fx-border-width: 1px;");
                 break;
             case TRACK_REST:
                 duration = plan.getD_circuito();
                 descKey = "phase.trackRest";
+                timerBox.setStyle("-fx-border-color: cyan; -fx-border-width: 1px;");
                 break;
             case FINISHED:
             default:
+                timerBox.setStyle("-fx-border-color: green; -fx-border-width: 4px;");
+                timerFlow.getChildren().forEach((child) -> {
+                    ((Text)child).setFill(Color.BLACK);
+                });
+                
                 i18n.bind(statusLabel, "phase.finished");
                 if (!sessionFinished) {
                     sessionFinished = true;
@@ -253,6 +273,11 @@ public class TimeDashboardController extends AbstractController {
         int m = (duration % 3600) / 60;
         int s = duration % 60;
         timer.setDuration(h, m, s, 0);
+        
+        timerFlow.getChildren().forEach((child) -> {
+            ((Text)child).setFill(Color.BLACK);
+        });
+        
         timer.reset();
     }
 
@@ -285,6 +310,7 @@ public class TimeDashboardController extends AbstractController {
 
     @FXML
     private void onNext(ActionEvent event) {
+        audio.stop();
         if (!sessionFinished) {
             nextActivity();
         }
@@ -320,6 +346,7 @@ public class TimeDashboardController extends AbstractController {
 
     @FXML
     private void onResetCurrent(ActionEvent event) {
+        audio.stop();
         if (!sessionFinished) {
             timer.reset();
             setupScene();
@@ -328,6 +355,7 @@ public class TimeDashboardController extends AbstractController {
 
     @FXML
     private void onResetSession(ActionEvent event) {
+        audio.stop();
         if (!sessionFinished) timer.pause();
         setupSession();
     }
