@@ -8,11 +8,12 @@
 package fitnesstimer.controllers.base;
 
 import accesoBD.AccesoBD;
+import com.sun.javafx.css.StyleManager;
 import fitnesstimer.audio.AudioPlayer;
 import fitnesstimer.i18n.I18n;
 import java.net.URL;
+import java.util.Collections;
 import java.util.ResourceBundle;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,13 +77,19 @@ public abstract class AbstractController implements Initializable {
 
     @FXML
     protected void applyStyle() {
+        StyleManager style = StyleManager.getInstance();
+        
         switch (currentStyle) {
             case NIGHT:
-                Application.setUserAgentStylesheet("fitnesstimer/resources/css/styleN.css");
+                style.setUserAgentStylesheets(
+                        Collections.<String>singletonList("fitnesstimer/resources/css/styleN.css")
+                );
                 break;
             case DAY:
             default:
-                Application.setUserAgentStylesheet("fitnesstimer/resources/css/style.css");
+                style.setUserAgentStylesheets(
+                        Collections.<String>singletonList("fitnesstimer/resources/css/style.css")
+                );
         }
     }
 
