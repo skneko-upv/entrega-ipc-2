@@ -12,9 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import modelo.Grupo;
@@ -31,10 +29,6 @@ public class GroupHistoryController extends AbstractController {
 
     @FXML
     private LineChart<String,Number> chart;
-    @FXML
-    private NumberAxis timeAxis;
-    @FXML
-    private CategoryAxis sessionAxis;
     @FXML
     private TextField sessionNumPicker;
 
