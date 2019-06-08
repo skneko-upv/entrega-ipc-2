@@ -53,10 +53,13 @@
                         <Insets top="10.0" />
                      </padding>
                      <children>
-                        <TextField fx:id="tracksField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="109.0">
+                        <TextField fx:id="tracksField" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="109.0">
                            <font>
-                              <Font name="Microsoft Sans Serif" size="11.0" />
+                              <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
                         </TextField>
                      </children>
                   </HBox>
@@ -75,10 +78,13 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <TextField fx:id="exercisesField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="109.0">
+                        <TextField fx:id="exercisesField" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="109.0">
                            <font>
-                              <Font name="Microsoft Sans Serif" size="11.0" />
+                              <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
                         </TextField>
                      </children>
                      <padding>
@@ -100,10 +106,13 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <TextField fx:id="exerciseTimeField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="110.0">
+                        <TextField fx:id="exerciseTimeField" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="110.0">
                            <font>
-                              <Font name="Microsoft Sans Serif" size="11.0" />
+                              <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
                         </TextField>
                         <Label text="s">
                            <padding>
@@ -130,10 +139,13 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <TextField fx:id="warmupTimeField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="110.0">
+                        <TextField fx:id="warmupTimeField" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="110.0">
                            <font>
-                              <Font name="Microsoft Sans Serif" size="11.0" />
+                              <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
                         </TextField>
                         <Label text="s">
                            <padding>
@@ -160,10 +172,13 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <TextField fx:id="exerciseRestTimeField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="110.0">
+                        <TextField fx:id="exerciseRestTimeField" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="110.0">
                            <font>
-                              <Font name="Microsoft Sans Serif" size="11.0" />
+                              <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
                         </TextField>
                         <Label text="s">
                            <padding>
@@ -190,10 +205,13 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <TextField fx:id="trackRestTimeField" alignment="BASELINE_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="110.0">
+                        <TextField fx:id="trackRestTimeField" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="110.0">
                            <font>
-                              <Font name="Microsoft Sans Serif" size="11.0" />
+                              <Font name="Microsoft Sans Serif" size="12.0" />
                            </font>
+                           <padding>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </padding>
                         </TextField>
                         <Label text="s">
                            <padding>

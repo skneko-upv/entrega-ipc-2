@@ -37,14 +37,8 @@
             </ListView>
             <HBox alignment="CENTER" prefHeight="48.0" prefWidth="310.0" spacing="20.0" GridPane.rowIndex="1">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onShowHistory" text="Ver historial">
-                     <font>
-                        <Font name="Microsoft Sans Serif" size="13.0" />
-                     </font></Button>
-                  <Button mnemonicParsing="false" onAction="#onAdd" text="Añadir">
-                     <font>
-                        <Font name="Microsoft Sans Serif" size="13.0" />
-                     </font></Button>
+                  <Button mnemonicParsing="false" onAction="#onShowHistory" text="Ver historial" />
+                  <Button mnemonicParsing="false" onAction="#onAdd" text="Añadir" />
                </children>
             </HBox>
          </children>
@@ -124,7 +118,7 @@
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
-                        <Label fx:id="exerciseTime">
+                        <Label fx:id="exerciseTime" alignment="BASELINE_LEFT">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -155,7 +149,7 @@
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <children>
-                        <Label fx:id="warmUpTime">
+                        <Label fx:id="warmUpTime" alignment="BASELINE_LEFT">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -186,7 +180,7 @@
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <children>
-                        <Label fx:id="restTimeExercise">
+                        <Label fx:id="restTimeExercise" alignment="BASELINE_LEFT">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -217,7 +211,7 @@
                   </Text>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <children>
-                        <Label fx:id="restTimeTrack">
+                        <Label fx:id="restTimeTrack" alignment="BASELINE_LEFT">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -246,14 +240,8 @@
    <bottom>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="568.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="prevBtn" mnemonicParsing="false" onAction="#onPrev" text="Retroceder">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font></Button>
-            <Button fx:id="nextBtn" mnemonicParsing="false" onAction="#onNext" text="Continuar">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font></Button>
+            <Button fx:id="prevBtn" mnemonicParsing="false" onAction="#onPrev" text="Retroceder" />
+            <Button fx:id="nextBtn" mnemonicParsing="false" onAction="#onNext" text="Continuar" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
