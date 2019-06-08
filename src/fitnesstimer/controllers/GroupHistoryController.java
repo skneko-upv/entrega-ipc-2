@@ -32,8 +32,9 @@ public class GroupHistoryController extends AbstractController {
     @FXML
     private TextField sessionNumPicker;
 
+    private XYChart.Series<String,Number> realPerSessionSeries;
+    private XYChart.Series<String,Number> restPerSessionSeries;
     private XYChart.Series<String,Number> timePerSessionSeries;
-
     private Grupo group;
     private int sessionNum;
 
@@ -53,14 +54,18 @@ public class GroupHistoryController extends AbstractController {
         sessionNumPicker.setText(String.valueOf(sessionNum));
 
         this.group = group;
-
+        
         chart.titleProperty().bind(i18n.getStringBinding("history.chart.title", group.getCodigo()));
-
+        realPerSessionSeries = new XYChart.Series<>();
+        realPerSessionSeries.nameProperty().bind(i18n.getStringBinding("history.timeSeries.name"));
+        
+        restPerSessionSeries = new XYChart.Series<>();
+        restPerSessionSeries.setName("Descanso por sesión");
+        
         timePerSessionSeries = new XYChart.Series<>();
-        timePerSessionSeries.nameProperty().bind(i18n.getStringBinding("history.timeSeries.name"));
-
-        chart.getData().add(timePerSessionSeries);
-
+        timePerSessionSeries.setName("Duración de la sesión");
+        
+        chart.getData().addAll(realPerSessionSeries,restPerSessionSeries,timePerSessionSeries);
         sessionNumPicker.textProperty().addListener((_val, _oldVal, newVal) -> {
             try {
                 sessionNum = Integer.parseInt(newVal);
@@ -72,15 +77,39 @@ public class GroupHistoryController extends AbstractController {
     }
 
     private void drawChart() {
+        realPerSessionSeries.getData().clear();
+        restPerSessionSeries.getData().clear();
         timePerSessionSeries.getData().clear();
         group.getSesiones().sort((Sesion a, Sesion b) -> -(a.getFecha().compareTo(b.getFecha())));
         for (int i = 0; i < sessionNum && i < group.getSesiones().size(); i++) {
             Sesion s = group.getSesiones().get(i);
-            timePerSessionSeries.getData().add(
+            realPerSessionSeries.getData().add(
                     new XYChart.Data<>(
                             s.getFecha().toString(),
                             (double) s.getDuracion().getSeconds() / 60
                     )
+            );
+            restPerSessionSeries.getData().add(
+                    new XYChart.Data<>(
+                            s.getFecha().toString(),
+                            (double) (
+                                    (s.getTipo().getNum_circuitos()*(s.getTipo().getNum_ejercicios()-1)*s.getTipo().getD_ejercicio()) + 
+                                    (s.getTipo().getNum_circuitos()-1)*s.getTipo().getD_circuito()
+                                    )/60
+                     )
+            );
+            timePerSessionSeries.getData().add(
+                    new XYChart.Data<>(
+                            s.getFecha().toString(),
+                            (double) (s.getTipo().getNum_circuitos()*(s.getTipo().getNum_ejercicios()*s.getTipo().getT_ejercicio() + 
+                                       (s.getTipo().getNum_ejercicios()-1)*s.getTipo().getD_ejercicio() )
+                                    + (s.getTipo().getNum_circuitos()-1)*s.getTipo().getD_circuito() +
+                                       s.getTipo().getT_calentamiento()
+                                    )/60
+                    
+                    )
+                                    
+                              
             );
         }
     }
